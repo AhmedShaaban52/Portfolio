@@ -8,25 +8,13 @@ import { Projects } from "@/components/Projects";
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen flex flex-col bg-background text-foreground">
-      {/* القائمة العلوية ثابتة في مكانها */}
+    <div className="relative min-h-screen flex flex-col">
       <Navbar />
-
-      {/* السكاشن هتعرض ورا بعض بشكل عمودي انسيابي */}
       <main className="flex-1 flex flex-col">
-        {/* سكشن الهيرو الأساسي */}
         <Hero />
-
-        {/* سكشن عن المطور */}
         <About />
-
-        {/* سكشن المشاريع بالكروت والتأثير التفاعلي */}
         <Projects />
-
-        {/* سكشن المهارات والخبرات */}
         <ExperienceSkills />
-
-        {/* سكشن فورمة التواصل */}
         <Contact />
       </main>
     </div>

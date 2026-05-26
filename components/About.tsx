@@ -1,91 +1,103 @@
 "use client";
 
-import { InteractiveCanvas } from "./InteractiveCanvas";
-import { Code2, Database, Zap } from "lucide-react";
+import { Code2, Database, Zap, Users, Package, Calendar } from "lucide-react";
+
+const STATS = [
+    { label: "Years Experience", value: "3+", icon: Calendar },
+    { label: "Projects Shipped", value: "20+", icon: Package },
+    { label: "Happy Clients", value: "15+", icon: Users },
+];
+
+const CARDS = [
+    {
+        icon: Code2,
+        title: "Architecture & Clean Code",
+        desc: "Crafting scalable components with fully structured, flexible, and reusable engineering patterns.",
+    },
+    {
+        icon: Database,
+        title: "Backend & Security",
+        desc: "Structuring databases and implementing tight security models like Row Level Security (RLS).",
+    },
+    {
+        icon: Zap,
+        title: "Performance Optimization",
+        desc: "Blazing-fast speed, advanced SEO structures, and dynamic rendering strategies (SSR/ISR).",
+    },
+];
 
 export function About() {
     return (
         <section
             id="about"
-            className="relative py-28 bg-background overflow-hidden border-t border-border/40"
+            className="relative py-32 overflow-hidden border-t border-border/40 bg-transparent"
         >
-            {/* شبكة النقاط والأنيميشن التفاعلي بالخلفية */}
-            <InteractiveCanvas />
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-            {/* إضاءة خفيفة جانبية (Ambient Glow) لتكحيل السكشن */}
-            <div className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00df9a]/5 rounded-full blur-[120px]" />
-
-            <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-
-                {/* ── الجزء الأيسر: المحتوى النصي ── */}
-                <div className="lg:col-span-7 flex flex-col items-start space-y-6 text-left">
-                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium tracking-wide bg-[#00df9a]/10 text-[#00df9a] border border-[#00df9a]/20">
-                        My Story
+                {/* Label */}
+                <div className="flex items-center gap-3 mb-14">
+                    <span className="text-[#00df9a] font-mono text-sm font-bold">01.</span>
+                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium
+            bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
+                        About Me
                     </span>
-
-                    <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-                        Passionate about weaving tech & design into <span className="text-[#00df9a]">digital reality</span>
-                    </h2>
-
-                    <p className="text-muted-foreground text-base leading-relaxed max-w-2xl">
-                        I am a full-stack software developer specialized in building fast, scalable, and secure web applications using the modern **Next.js** ecosystem. My core passion lies in bridging the gap between elegant minimalist user interfaces and robust backend architecture.
-                    </p>
-
-                    <p className="text-muted-foreground text-base leading-relaxed max-w-2xl">
-                        I deeply care about user experience (UX/UI) details, writing maintainable clean code, and engineering optimized database performance to deliver fully-integrated, production-ready products that stand out.
-                    </p>
+                    <div className="flex-1 h-px bg-border/60 max-w-[80px]" />
                 </div>
 
-                {/* ── الجزء الأيمن: كروت المميزات ── */}
-                <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
 
-                    {/* كارت 1 */}
-                    <div className="group bg-card/40 backdrop-blur-sm border rounded-2xl p-6 hover:border-[#00df9a]/30 transition-all duration-300">
-                        <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-xl bg-[#00df9a]/10 text-[#00df9a] shrink-0 group-hover:bg-[#00df9a] group-hover:text-black transition-colors duration-300">
-                                <Code2 className="w-5 h-5" />
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-foreground mb-1">Architecture & Clean Code</h3>
-                                <p className="text-muted-foreground text-xs leading-relaxed">
-                                    Crafting scalable components with fully structured, flexible, and reusable engineering patterns.
-                                </p>
-                            </div>
+                    {/* Left */}
+                    <div className="lg:col-span-6 flex flex-col space-y-8">
+                        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight
+              text-foreground leading-[1.1]">
+                            Passionate about weaving tech & design into{" "}
+                            <span className="text-[#00df9a]">digital reality</span>
+                        </h2>
+
+                        <p className="text-muted-foreground text-base leading-relaxed">
+                            I'm a fullstack developer specialized in building fast, scalable, and secure
+                            web applications using the modern Next.js ecosystem. My core passion lies in
+                            bridging the gap between elegant UIs and robust backend architecture.
+                        </p>
+                        <p className="text-muted-foreground text-base leading-relaxed">
+                            I care deeply about UX/UI details, writing maintainable clean code, and
+                            engineering optimized database performance to deliver production-ready
+                            products that stand out.
+                        </p>
+
+                        {/* Stats */}
+                        <div className="grid grid-cols-3 gap-4 pt-2">
+                            {STATS.map(({ label, value, icon: Icon }) => (
+                                <div key={label} className="group flex flex-col items-center text-center p-5
+                  rounded-2xl bg-card/40 backdrop-blur-sm border border-border/60
+                  hover:border-[#00df9a]/30 hover:bg-[#00df9a]/5 transition-all duration-300">
+                                    <Icon className="w-5 h-5 text-[#00df9a] mb-3 opacity-70" />
+                                    <span className="text-3xl font-bold text-foreground">{value}</span>
+                                    <span className="text-[11px] text-muted-foreground mt-1 leading-tight">{label}</span>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
-                    {/* كارت 2 */}
-                    <div className="group bg-card/40 backdrop-blur-sm border rounded-2xl p-6 hover:border-[#00df9a]/30 transition-all duration-300">
-                        <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-xl bg-[#00df9a]/10 text-[#00df9a] shrink-0 group-hover:bg-[#00df9a] group-hover:text-black transition-colors duration-300">
-                                <Database className="w-5 h-5" />
+                    {/* Right */}
+                    <div className="lg:col-span-6 flex flex-col gap-4">
+                        {CARDS.map(({ icon: Icon, title, desc }, i) => (
+                            <div key={i} className="group flex items-start gap-5 p-6 rounded-2xl
+                bg-card/40 backdrop-blur-sm border border-border/60
+                hover:border-[#00df9a]/30 hover:bg-[#00df9a]/5 transition-all duration-300">
+                                <div className="shrink-0 p-3 rounded-xl bg-[#00df9a]/10 text-[#00df9a]
+                  group-hover:bg-[#00df9a] group-hover:text-black transition-all duration-300">
+                                    <Icon className="w-5 h-5" />
+                                </div>
+                                <div>
+                                    <h3 className="font-bold text-foreground mb-1.5">{title}</h3>
+                                    <p className="text-muted-foreground text-sm leading-relaxed">{desc}</p>
+                                </div>
                             </div>
-                            <div>
-                                <h3 className="font-bold text-foreground mb-1">Backend & Security</h3>
-                                <p className="text-muted-foreground text-xs leading-relaxed">
-                                    Structuring databases and implementing tight security models like Row Level Security (RLS).
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* كارت 3 */}
-                    <div className="group bg-card/40 backdrop-blur-sm border rounded-2xl p-6 hover:border-[#00df9a]/30 transition-all duration-300">
-                        <div className="flex items-start gap-4">
-                            <div className="p-3 rounded-xl bg-[#00df9a]/10 text-[#00df9a] shrink-0 group-hover:bg-[#00df9a] group-hover:text-black transition-colors duration-300">
-                                <Zap className="w-5 h-5" />
-                            </div>
-                            <div>
-                                <h3 className="font-bold text-foreground mb-1">Performance Optimization</h3>
-                                <p className="text-muted-foreground text-xs leading-relaxed">
-                                    Blazing-fast speed execution, advanced SEO structures, and dynamic rendering strategies (SSR/ISR).
-                                </p>
-                            </div>
-                        </div>
+                        ))}
                     </div>
 
                 </div>
-
             </div>
         </section>
     );

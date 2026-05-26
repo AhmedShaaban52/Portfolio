@@ -1,26 +1,146 @@
-import { Mail, Send } from "lucide-react";
+"use client";
+
+import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { InteractiveCanvas } from "./InteractiveCanvas";
+
+function GithubIcon({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" />
+        </svg>
+    );
+}
+
+function LinkedinIcon({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+        </svg>
+    );
+}
+
+const CONTACT_INFO = [
+    { icon: Mail, label: "Email", value: "hello@yourname.com" },
+    { icon: MapPin, label: "Location", value: "Cairo, Egypt" },
+    { icon: Phone, label: "Phone", value: "+20 100 000 0000" },
+];
+
+const SOCIALS = [
+    { label: "GitHub", icon: GithubIcon, href: "#" },
+    { label: "LinkedIn", icon: LinkedinIcon, href: "#" },
+];
 
 export function Contact() {
     return (
-        <section id="contact" className="relative py-24 bg-background overflow-hidden border-t">
-            <InteractiveCanvas />
-            <div className="max-w-3xl mx-auto px-6 relative z-10 text-center">
-                <h2 className="text-4xl font-bold mb-4">Get In <span className="text-[#00df9a]">Touch</span></h2>
-                <p className="text-muted-foreground mb-12">Have a project in mind? Let's build something amazing together.</p>
+        <section
+            id="contact"
+            className="relative py-32 overflow-hidden border-t border-border/40 bg-transparent"
+        >
+            <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-                <form className="grid grid-cols-1 gap-4 text-left bg-card/50 backdrop-blur-sm p-8 rounded-3xl border">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input type="text" placeholder="Name" className="bg-background border rounded-xl px-4 py-3 outline-none focus:border-[#00df9a] transition-colors" />
-                        <input type="email" placeholder="Email" className="bg-background border rounded-xl px-4 py-3 outline-none focus:border-[#00df9a] transition-colors" />
+                {/* Label */}
+                <div className="flex items-center gap-3 mb-4">
+                    <span className="text-[#00df9a] font-mono text-sm font-bold">04.</span>
+                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium
+            bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
+                        Contact
+                    </span>
+                    <div className="flex-1 h-px bg-border/60 max-w-[80px]" />
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+
+                    {/* Left */}
+                    <div className="flex flex-col space-y-8">
+                        <div>
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight
+                text-foreground mb-4">
+                                Let's Work <span className="text-[#00df9a]">Together</span>
+                            </h2>
+                            <p className="text-muted-foreground text-base leading-relaxed max-w-md">
+                                Have a project in mind or want to discuss an opportunity? I'm always open
+                                to new ideas and collaborations. Drop me a message!
+                            </p>
+                        </div>
+
+                        <div className="flex flex-col gap-4">
+                            {CONTACT_INFO.map(({ icon: Icon, label, value }) => (
+                                <div key={label} className="flex items-center gap-4 p-4 rounded-2xl
+                  bg-card/40 backdrop-blur-sm border border-border/60
+                  hover:border-[#00df9a]/30 transition-all duration-200 group">
+                                    <div className="p-2.5 rounded-xl bg-[#00df9a]/10 text-[#00df9a]
+                    group-hover:bg-[#00df9a] group-hover:text-black transition-all duration-200">
+                                        <Icon className="w-4 h-4" />
+                                    </div>
+                                    <div>
+                                        <p className="text-[11px] text-muted-foreground uppercase tracking-wider">{label}</p>
+                                        <p className="text-sm font-medium text-foreground">{value}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="flex items-center gap-3 pt-2">
+                            <span className="text-xs text-muted-foreground">Find me on</span>
+                            {SOCIALS.map(({ label, icon: Icon, href }) => (
+                                <a key={label} href={href} aria-label={label}
+                                    className="p-2.5 rounded-xl bg-card/40 border border-border/60 text-muted-foreground
+                    hover:border-[#00df9a]/40 hover:text-[#00df9a] hover:bg-[#00df9a]/5
+                    transition-all duration-200">
+                                    <Icon className="w-4 h-4" />
+                                </a>
+                            ))}
+                        </div>
                     </div>
-                    <input type="text" placeholder="Subject" className="bg-background border rounded-xl px-4 py-3 outline-none focus:border-[#00df9a] transition-colors" />
-                    <textarea placeholder="Message" rows={5} className="bg-background border rounded-xl px-4 py-3 outline-none focus:border-[#00df9a] transition-colors" />
-                    <Button className="bg-[#00df9a] hover:bg-[#00df9a]/90 text-black font-bold h-12 rounded-xl gap-2">
-                        <Send className="w-4 h-4" /> Send Message
-                    </Button>
-                </form>
+
+                    {/* Right — Form */}
+                    <div className="p-8 rounded-3xl bg-card/40 backdrop-blur-sm border border-border/60">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-xs font-medium text-muted-foreground">Name</label>
+                                <input type="text" placeholder="Your name"
+                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm
+                    text-foreground placeholder:text-muted-foreground/50
+                    outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10
+                    transition-all duration-200" />
+                            </div>
+                            <div className="flex flex-col gap-1.5">
+                                <label className="text-xs font-medium text-muted-foreground">Email</label>
+                                <input type="email" placeholder="your@email.com"
+                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm
+                    text-foreground placeholder:text-muted-foreground/50
+                    outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10
+                    transition-all duration-200" />
+                            </div>
+                        </div>
+
+                        <div className="flex flex-col gap-1.5 mb-4">
+                            <label className="text-xs font-medium text-muted-foreground">Subject</label>
+                            <input type="text" placeholder="Project inquiry..."
+                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm
+                  text-foreground placeholder:text-muted-foreground/50
+                  outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10
+                  transition-all duration-200" />
+                        </div>
+
+                        <div className="flex flex-col gap-1.5 mb-6">
+                            <label className="text-xs font-medium text-muted-foreground">Message</label>
+                            <textarea rows={5} placeholder="Tell me about your project..."
+                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm
+                  text-foreground placeholder:text-muted-foreground/50
+                  outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10
+                  transition-all duration-200 resize-none" />
+                        </div>
+
+                        <Button className="w-full bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-bold
+              h-12 rounded-xl gap-2 text-sm transition-all active:scale-[0.98]
+              shadow-[0_4px_24px_rgba(0,223,154,0.2)]">
+                            <Send className="w-4 h-4" />
+                            Send Message
+                        </Button>
+                    </div>
+
+                </div>
             </div>
         </section>
     );
