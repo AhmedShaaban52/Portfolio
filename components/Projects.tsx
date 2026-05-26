@@ -1,6 +1,7 @@
 "use client";
 
 import { ExternalLink } from "lucide-react";
+import { InteractiveCanvas } from "./InteractiveCanvas";
 
 function GithubIcon({ className }: { className?: string }) {
     return (
@@ -44,15 +45,20 @@ export function Projects() {
     return (
         <section
             id="projects"
-            className="relative py-32 overflow-hidden border-t border-border/40 bg-transparent"
+            className="relative py-28 bg-background overflow-hidden border-t border-border/40"
         >
+            {/* الأنيميشن التفاعلي الخاص بالخلفية للسكشن */}
+            <InteractiveCanvas />
+
+            {/* إضاءة جانبية متحركة خفيفة (Ambient Glow) */}
+            <div className="pointer-events-none absolute -left-32 top-1/3 -translate-y-1/2 w-[500px] h-[500px] bg-[#00df9a]/5 rounded-full blur-[120px]" />
+
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-                {/* Label */}
+                {/* Header */}
                 <div className="flex items-center gap-3 mb-4">
                     <span className="text-[#00df9a] font-mono text-sm font-bold">02.</span>
-                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium
-            bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
+                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
                         Featured Work
                     </span>
                     <div className="flex-1 h-px bg-border/60 max-w-[80px]" />
@@ -62,58 +68,62 @@ export function Projects() {
                     <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
                         Selected <span className="text-[#00df9a]">Projects</span>
                     </h2>
-                    <a href="#" className="hidden sm:flex items-center gap-2 text-sm font-medium
-            text-muted-foreground hover:text-[#00df9a] transition-colors group">
+
+                    <a
+                        href="#"
+                        className="hidden sm:flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-[#00df9a] transition-colors group"
+                    >
                         <GithubIcon className="w-4 h-4" />
                         View all on GitHub
                         <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                     </a>
                 </div>
 
+                {/* Cards Grid مع تطبيق الـ Backdrop Blur المتناسق بنسبة 100% */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {PROJECTS.map((p, i) => (
-                        <div key={i} className="group relative flex flex-col
-              bg-card/40 backdrop-blur-sm border border-border/60 rounded-2xl overflow-hidden
-              hover:border-[#00df9a]/30 hover:shadow-2xl hover:shadow-[#00df9a]/8
-              transition-all duration-500">
-
-                            {/* Image */}
+                        <div
+                            key={i}
+                            className="group relative flex flex-col bg-card/40 backdrop-blur-sm border border-border/60 rounded-2xl overflow-hidden hover:border-[#00df9a]/30 hover:shadow-2xl hover:shadow-[#00df9a]/8 transition-all duration-500"
+                        >
+                            {/* Image Container */}
                             <div className="relative aspect-video overflow-hidden bg-muted">
                                 <img
                                     src={p.image}
                                     alt={p.title}
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent
-                  to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
-                                <div className="absolute inset-0 flex items-center justify-center gap-4
-                  opacity-0 group-hover:opacity-100 transition-all duration-300">
-                                    <a href={p.github} className="flex items-center gap-1.5 px-4 py-2 rounded-full
-                    bg-black/60 backdrop-blur-sm text-white text-xs font-medium
-                    hover:bg-[#00df9a] hover:text-black transition-colors">
+                                {/* Hover links */}
+                                <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                                    <a
+                                        href={p.github}
+                                        className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/60 backdrop-blur-sm text-white text-xs font-medium hover:bg-[#00df9a] hover:text-black transition-colors"
+                                    >
                                         <GithubIcon className="w-3.5 h-3.5" /> Code
                                     </a>
-                                    <a href={p.demo} className="flex items-center gap-1.5 px-4 py-2 rounded-full
-                    bg-[#00df9a]/90 text-black text-xs font-medium hover:bg-[#00df9a] transition-colors">
+
+                                    <a
+                                        href={p.demo}
+                                        className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#00df9a]/90 text-black text-xs font-medium hover:bg-[#00df9a] transition-colors"
+                                    >
                                         <ExternalLink className="w-3.5 h-3.5" /> Live Demo
                                     </a>
                                 </div>
 
                                 {p.featured && (
-                                    <span className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1
-                    rounded-full bg-[#00df9a] text-black tracking-wide">
+                                    <span className="absolute top-3 left-3 text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#00df9a] text-black tracking-wide">
                                         FEATURED
                                     </span>
                                 )}
                             </div>
 
-                            {/* Body */}
+                            {/* Body Section */}
                             <div className="flex flex-col flex-1 p-6">
                                 <div className="flex flex-wrap gap-1.5 mb-4">
                                     {p.tags.map(t => (
-                                        <span key={t} className="text-[10px] font-medium px-2.5 py-1 rounded-full
-                      bg-[#00df9a]/10 text-[#00df9a] border border-[#00df9a]/15">
+                                        <span key={t} className="text-[10px] font-medium px-2.5 py-1 rounded-full bg-[#00df9a]/10 text-[#00df9a] border border-[#00df9a]/15">
                                             {t}
                                         </span>
                                     ))}
@@ -121,10 +131,10 @@ export function Projects() {
                                 <h3 className="text-lg font-bold text-foreground mb-2">{p.title}</h3>
                                 <p className="text-muted-foreground text-sm leading-relaxed flex-1">{p.desc}</p>
                             </div>
-
                         </div>
                     ))}
                 </div>
+
             </div>
         </section>
     );

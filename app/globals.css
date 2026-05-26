@@ -3,13 +3,6 @@
 @import "shadcn/tailwind.css";
 
 @layer base {
-  .bg-dots {
-    background-image: radial-gradient(#27272a 1px, transparent 1px);
-    background-size: 20px 20px;
-  }
-}
-
-@layer base {
   * {
     @apply border-border outline-ring/50;
   }
@@ -21,7 +14,7 @@
   }
 }
 
-/* ══ Aurora Orb Animations ══ */
+
 @keyframes orb-float-1 {
   0%,  100% { transform: translate(0px,   0px)  scale(1);    }
   25%        { transform: translate(50px, -70px) scale(1.08); }

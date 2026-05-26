@@ -1,5 +1,7 @@
 "use client";
 
+import { InteractiveCanvas } from "./InteractiveCanvas";
+
 const SKILLS = [
     { name: "Next.js", category: "Frontend" },
     { name: "React", category: "Frontend" },
@@ -47,6 +49,24 @@ export function ExperienceSkills() {
             id="experience"
             className="relative py-32 overflow-hidden border-t border-border/40 bg-transparent"
         >
+            {/* ── خلفية الكرات المضيئة العائمة (Aurora Orbs) المتوافقة مع أنيميشن الـ CSS ── */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-30 dark:opacity-50">
+                <div
+                    className="absolute top-[40%] left-[20%] w-[450px] h-[450px] rounded-full bg-[#00df9a]/6 blur-[110px]"
+                    style={{ animation: "orb-float-2 24s ease-in-out infinite" }}
+                />
+                <div
+                    className="absolute top-[10%] right-[5%] w-[380px] h-[380px] rounded-full bg-[#00df9a]/8 blur-[95px]"
+                    style={{ animation: "orb-float-4 18s ease-in-out infinite" }}
+                />
+            </div>
+
+            {/* الأنيميشن التفاعلي الخاص بالخلفية للسكشن */}
+            <InteractiveCanvas />
+
+            {/* إضاءة جانبية متحركة خفيفة (Ambient Glow) الأصلية الخاصة بك */}
+            <div className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00df9a]/5 rounded-full blur-[120px] z-10" />
+
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
                 {/* Label */}

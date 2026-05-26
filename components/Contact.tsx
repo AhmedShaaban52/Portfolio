@@ -1,5 +1,6 @@
 "use client";
 
+import { InteractiveCanvas } from "./InteractiveCanvas";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -36,6 +37,24 @@ export function Contact() {
             id="contact"
             className="relative py-32 overflow-hidden border-t border-border/40 bg-transparent"
         >
+            {/* ── خلفية الكرات المضيئة العائمة (Aurora Orbs) المتوافقة مع أنيميشن الـ CSS ── */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-30 dark:opacity-50">
+                <div
+                    className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full bg-[#00df9a]/8 blur-[100px]"
+                    style={{ animation: "orb-float-1 20s ease-in-out infinite" }}
+                />
+                <div
+                    className="absolute bottom-[10%] right-[15%] w-[350px] h-[350px] rounded-full bg-primary/5 blur-[90px]"
+                    style={{ animation: "orb-float-3 16s ease-in-out infinite" }}
+                />
+            </div>
+
+            {/* الأنيميشن التفاعلي الخاص بالخلفية للسكشن */}
+            <InteractiveCanvas />
+
+            {/* إضاءة جانبية متحركة خفيفة (Ambient Glow) الأصلية الخاصة بك */}
+            <div className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00df9a]/5 rounded-full blur-[120px] z-10" />
+
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
                 {/* Label */}
