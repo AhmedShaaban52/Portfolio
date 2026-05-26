@@ -28,11 +28,11 @@ export function About() {
                     </h2>
 
                     <p className="text-muted-foreground text-base leading-relaxed max-w-2xl">
-                        أنا مطور ويب متكامل (Fullstack Developer) متخصص في بناء تطبيقات ويب سريعة وقابلة للتوسع باستخدام نظام **Next.js** البيئي. شغفي الأساسي هو سد الفجوة بين التصميمات العصرية الأنيقة وبين البنية البرمجية القوية والآمنة.
+                        I am a full-stack software developer specialized in building fast, scalable, and secure web applications using the modern **Next.js** ecosystem. My core passion lies in bridging the gap between elegant minimalist user interfaces and robust backend architecture.
                     </p>
 
                     <p className="text-muted-foreground text-base leading-relaxed max-w-2xl">
-                        أهتم جداً بتفاصيل تجربة المستخدم (UX/UI)، كتابة الأكواد النظيفة (Clean Code) القابلة للصيانة، وتأمين وإعداد قواعد البيانات بكفاءة عالية لضمان تقديم منتج حقيقي متكامل ومستقر بنسبة 100%.
+                        I deeply care about user experience (UX/UI) details, writing maintainable clean code, and engineering optimized database performance to deliver fully-integrated, production-ready products that stand out.
                     </p>
                 </div>
 
@@ -48,7 +48,7 @@ export function About() {
                             <div>
                                 <h3 className="font-bold text-foreground mb-1">Architecture & Clean Code</h3>
                                 <p className="text-muted-foreground text-xs leading-relaxed">
-                                    بناء مكونات بتصميم هندسي منظم، مرن، وقابل لإعادة الاستخدام بسهولة.
+                                    Crafting scalable components with fully structured, flexible, and reusable engineering patterns.
                                 </p>
                             </div>
                         </div>
@@ -63,7 +63,7 @@ export function About() {
                             <div>
                                 <h3 className="font-bold text-foreground mb-1">Backend & Security</h3>
                                 <p className="text-muted-foreground text-xs leading-relaxed">
-                                    هيكلة قواعد البيانات، وإعداد سياسات حماية صارمة مثل Row Level Security (RLS).
+                                    Structuring databases and implementing tight security models like Row Level Security (RLS).
                                 </p>
                             </div>
                         </div>
@@ -78,7 +78,7 @@ export function About() {
                             <div>
                                 <h3 className="font-bold text-foreground mb-1">Performance Optimization</h3>
                                 <p className="text-muted-foreground text-xs leading-relaxed">
-                                    تحسين فائق للسرعة، أرشفة محركات البحث (SEO)، والاعتماد الكامل على SSR/ISR.
+                                    Blazing-fast speed execution, advanced SEO structures, and dynamic rendering strategies (SSR/ISR).
                                 </p>
                             </div>
                         </div>
