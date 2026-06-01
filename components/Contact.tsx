@@ -37,7 +37,6 @@ export function Contact() {
             id="contact"
             className="relative py-32 overflow-hidden border-t border-border/40 bg-transparent"
         >
-            {/* ── خلفية الكرات المضيئة العائمة (Aurora Orbs) المتوافقة مع أنيميشن الـ CSS ── */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-30 dark:opacity-50">
                 <div
                     className="absolute top-[20%] left-[10%] w-[400px] h-[400px] rounded-full bg-[#00df9a]/8 blur-[100px]"
@@ -48,23 +47,17 @@ export function Contact() {
                     style={{ animation: "orb-float-3 16s ease-in-out infinite" }}
                 />
             </div>
-
-            {/* الأنيميشن التفاعلي الخاص بالخلفية للسكشن */}
             <InteractiveCanvas />
 
-            {/* إضاءة جانبية متحركة خفيفة (Ambient Glow) الأصلية الخاصة بك */}
             <div className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00df9a]/5 rounded-full blur-[120px] z-10" />
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-
-                {/* Label */}
                 <div className="flex items-center gap-3 mb-4">
                     <span className="text-[#00df9a] font-mono text-sm font-bold">04.</span>
-                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium
-            bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
+                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
                         Contact
                     </span>
-                    <div className="flex-1 h-px bg-border/60 max-w-[80px]" />
+                    <div className="flex-1 h-px bg-border/60 max-w-20" />
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -72,8 +65,7 @@ export function Contact() {
                     {/* Left */}
                     <div className="flex flex-col space-y-8">
                         <div>
-                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight
-                text-foreground mb-4">
+                            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-4">
                                 Let's Work <span className="text-[#00df9a]">Together</span>
                             </h2>
                             <p className="text-muted-foreground text-base leading-relaxed max-w-md">
@@ -84,11 +76,8 @@ export function Contact() {
 
                         <div className="flex flex-col gap-4">
                             {CONTACT_INFO.map(({ icon: Icon, label, value }) => (
-                                <div key={label} className="flex items-center gap-4 p-4 rounded-2xl
-                  bg-card/40 backdrop-blur-sm border border-border/60
-                  hover:border-[#00df9a]/30 transition-all duration-200 group">
-                                    <div className="p-2.5 rounded-xl bg-[#00df9a]/10 text-[#00df9a]
-                    group-hover:bg-[#00df9a] group-hover:text-black transition-all duration-200">
+                                <div key={label} className="flex items-center gap-4 p-4 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/60 hover:border-[#00df9a]/30 transition-all duration-200 group">
+                                    <div className="p-2.5 rounded-xl bg-[#00df9a]/10 text-[#00df9a] group-hover:bg-[#00df9a] group-hover:text-black transition-all duration-200">
                                         <Icon className="w-4 h-4" />
                                     </div>
                                     <div>
@@ -103,57 +92,40 @@ export function Contact() {
                             <span className="text-xs text-muted-foreground">Find me on</span>
                             {SOCIALS.map(({ label, icon: Icon, href }) => (
                                 <a key={label} href={href} aria-label={label}
-                                    className="p-2.5 rounded-xl bg-card/40 border border-border/60 text-muted-foreground
-                    hover:border-[#00df9a]/40 hover:text-[#00df9a] hover:bg-[#00df9a]/5
-                    transition-all duration-200">
+                                    className="p-2.5 rounded-xl bg-card/40 border border-border/60 text-muted-foreground  hover:border-[#00df9a]/40 hover:text-[#00df9a] hover:bg-[#00df9a]/5 transition-all duration-200">
                                     <Icon className="w-4 h-4" />
                                 </a>
                             ))}
                         </div>
                     </div>
 
-                    {/* Right — Form */}
                     <div className="p-8 rounded-3xl bg-card/40 backdrop-blur-sm border border-border/60">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-xs font-medium text-muted-foreground">Name</label>
                                 <input type="text" placeholder="Your name"
-                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm
-                    text-foreground placeholder:text-muted-foreground/50
-                    outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10
-                    transition-all duration-200" />
+                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200" />
                             </div>
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-xs font-medium text-muted-foreground">Email</label>
                                 <input type="email" placeholder="your@email.com"
-                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm
-                    text-foreground placeholder:text-muted-foreground/50
-                    outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10
-                    transition-all duration-200" />
+                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200" />
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-1.5 mb-4">
                             <label className="text-xs font-medium text-muted-foreground">Subject</label>
                             <input type="text" placeholder="Project inquiry..."
-                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm
-                  text-foreground placeholder:text-muted-foreground/50
-                  outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10
-                  transition-all duration-200" />
+                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200" />
                         </div>
 
                         <div className="flex flex-col gap-1.5 mb-6">
                             <label className="text-xs font-medium text-muted-foreground">Message</label>
                             <textarea rows={5} placeholder="Tell me about your project..."
-                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm
-                  text-foreground placeholder:text-muted-foreground/50
-                  outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10
-                  transition-all duration-200 resize-none" />
+                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200 resize-none" />
                         </div>
 
-                        <Button className="w-full bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-bold
-              h-12 rounded-xl gap-2 text-sm transition-all active:scale-[0.98]
-              shadow-[0_4px_24px_rgba(0,223,154,0.2)]">
+                        <Button className="w-full bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-bold h-12 rounded-xl gap-2 text-sm transition-all active:scale-[0.98] shadow-[0_4px_24px_rgba(0,223,154,0.2)]">
                             <Send className="w-4 h-4" />
                             Send Message
                         </Button>

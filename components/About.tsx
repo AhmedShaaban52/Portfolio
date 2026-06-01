@@ -9,15 +9,10 @@ export function About() {
             id="about"
             className="relative py-28 bg-background overflow-hidden border-t border-border/40"
         >
-            {/* الأنيميشن التفاعلي الخاص بالخلفية للسكشن */}
             <InteractiveCanvas />
 
-            {/* إضاءة جانبية متحركة خفيفة (Ambient Glow) */}
             <div className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00df9a]/5 rounded-full blur-[120px]" />
-
             <div className="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-
-                {/* الجزء الأيسر: المحتوى النصي */}
                 <div className="lg:col-span-7 flex flex-col items-start space-y-6 text-left">
                     <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium tracking-wide bg-[#00df9a]/10 text-[#00df9a] border border-[#00df9a]/20">
                         My Story
@@ -36,10 +31,8 @@ export function About() {
                     </p>
                 </div>
 
-                {/* الجزء الأيمن: كروت المميزات */}
                 <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4 w-full">
 
-                    {/* كارت 1 */}
                     <div className="group bg-card/40 backdrop-blur-sm border rounded-2xl p-6 hover:border-[#00df9a]/30 transition-all duration-300">
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-xl bg-[#00df9a]/10 text-[#00df9a] shrink-0 group-hover:bg-[#00df9a] group-hover:text-black transition-colors duration-300">
@@ -54,7 +47,6 @@ export function About() {
                         </div>
                     </div>
 
-                    {/* كارت 2 */}
                     <div className="group bg-card/40 backdrop-blur-sm border rounded-2xl p-6 hover:border-[#00df9a]/30 transition-all duration-300">
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-xl bg-[#00df9a]/10 text-[#00df9a] shrink-0 group-hover:bg-[#00df9a] group-hover:text-black transition-colors duration-300">
@@ -69,7 +61,6 @@ export function About() {
                         </div>
                     </div>
 
-                    {/* كارت 3 */}
                     <div className="group bg-card/40 backdrop-blur-sm border rounded-2xl p-6 hover:border-[#00df9a]/30 transition-all duration-300">
                         <div className="flex items-start gap-4">
                             <div className="p-3 rounded-xl bg-[#00df9a]/10 text-[#00df9a] shrink-0 group-hover:bg-[#00df9a] group-hover:text-black transition-colors duration-300">
@@ -83,9 +74,7 @@ export function About() {
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </section>
     );

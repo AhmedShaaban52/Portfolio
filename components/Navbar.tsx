@@ -3,23 +3,22 @@
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "./ModeToggle";
+import Link from "next/link";
 
 const NAV_LINKS = [
     { href: "#home", label: "Home" },
     { href: "#about", label: "About" },
     { href: "#projects", label: "Projects" },
     { href: "#experience", label: "Experience" },
-    { href: "#testimonials", label: "Testimonials" },
     { href: "#contact", label: "Contact" },
 ];
 
 export function Navbar() {
     return (
         <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-background/80 border-b border-border/40">
-            <div className="max-w-7xl mx-auto px-6 h-[68px] flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
 
-                {/* Logo */}
-                <a
+                <Link
                     href="#home"
                     className="text-lg font-bold tracking-tight text-foreground flex items-center gap-1.5 select-none shrink-0"
                 >
@@ -27,7 +26,7 @@ export function Navbar() {
                         {"</>"}
                     </span>
                     Next<span className="text-[#00df9a]">Dev</span>
-                </a>
+                </Link>
 
                 {/* Center Nav Links */}
                 <nav className="hidden md:flex items-center gap-0.5">

@@ -49,7 +49,6 @@ export function ExperienceSkills() {
             id="experience"
             className="relative py-32 overflow-hidden border-t border-border/40 bg-transparent"
         >
-            {/* ── خلفية الكرات المضيئة العائمة (Aurora Orbs) المتوافقة مع أنيميشن الـ CSS ── */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-30 dark:opacity-50">
                 <div
                     className="absolute top-[40%] left-[20%] w-[450px] h-[450px] rounded-full bg-[#00df9a]/6 blur-[110px]"
@@ -61,27 +60,20 @@ export function ExperienceSkills() {
                 />
             </div>
 
-            {/* الأنيميشن التفاعلي الخاص بالخلفية للسكشن */}
             <InteractiveCanvas />
 
-            {/* إضاءة جانبية متحركة خفيفة (Ambient Glow) الأصلية الخاصة بك */}
             <div className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[#00df9a]/5 rounded-full blur-[120px] z-10" />
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
-
-                {/* Label */}
                 <div className="flex items-center gap-3 mb-14">
                     <span className="text-[#00df9a] font-mono text-sm font-bold">03.</span>
-                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium
-            bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
+                    <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
                         Skills & Experience
                     </span>
-                    <div className="flex-1 h-px bg-border/60 max-w-[80px]" />
+                    <div className="flex-1 h-px bg-border/60 max-w-20" />
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-20">
-
-                    {/* Skills */}
                     <div>
                         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-10">
                             Technical <span className="text-[#00df9a]">Skills</span>
@@ -89,14 +81,10 @@ export function ExperienceSkills() {
                         <div className="flex flex-col gap-8">
                             {CATEGORIES.map(cat => (
                                 <div key={cat}>
-                                    <p className="text-xs font-semibold text-muted-foreground
-                    uppercase tracking-widest mb-3">{cat}</p>
+                                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">{cat}</p>
                                     <div className="flex flex-wrap gap-2.5">
                                         {SKILLS.filter(s => s.category === cat).map(s => (
-                                            <span key={s.name} className="px-4 py-2 rounded-xl text-sm font-medium
-                        bg-card/40 backdrop-blur-sm border border-border/60 text-foreground
-                        hover:border-[#00df9a]/40 hover:text-[#00df9a] hover:bg-[#00df9a]/5
-                        transition-all duration-200 cursor-default">
+                                            <span key={s.name} className="px-4 py-2 rounded-xl text-sm font-medium *:bg-card/40 backdrop-blur-sm border border-border/60 text-foreground hover:border-[#00df9a]/40 hover:text-[#00df9a] hover:bg-[#00df9a]/5 *:transition-all duration-200 cursor-default">
                                                 {s.name}
                                             </span>
                                         ))}
@@ -116,23 +104,11 @@ export function ExperienceSkills() {
                             <div className="flex flex-col gap-8">
                                 {EXPERIENCE.map((exp, i) => (
                                     <div key={i} className="relative pl-10 group">
-                                        <div className={`absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2
-                      transition-all duration-300
-                      ${exp.current
-                                                ? "bg-[#00df9a] border-[#00df9a] shadow-[0_0_12px_rgba(0,223,154,0.5)]"
-                                                : "bg-background border-border/60 group-hover:border-[#00df9a]"
-                                            }`}
-                                        />
-                                        <div className="p-5 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/60
-                      group-hover:border-[#00df9a]/30 group-hover:bg-[#00df9a]/5
-                      transition-all duration-300">
+                                        <div className={`absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 transition-all duration-300 ${exp.current ? "bg-[#00df9a] border-[#00df9a] shadow-[0_0_12px_rgba(0,223,154,0.5)]" : "bg-background border-border/60 group-hover:border-[#00df9a]"}`} />
+                                        <div className="p-5 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/60  group-hover:border-[#00df9a]/30 group-hover:bg-[#00df9a]/5 transition-all duration-300">
                                             <div className="flex items-start justify-between flex-wrap gap-2 mb-2">
                                                 <h3 className="text-base font-bold text-foreground">{exp.role}</h3>
-                                                <span className={`text-xs font-medium px-2.5 py-1 rounded-full
-                          ${exp.current
-                                                        ? "bg-[#00df9a]/15 text-[#00df9a]"
-                                                        : "bg-muted text-muted-foreground"
-                                                    }`}>
+                                                <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${exp.current ? "bg-[#00df9a]/15 text-[#00df9a]" : "bg-muted text-muted-foreground"}`}>
                                                     {exp.period}
                                                 </span>
                                             </div>
