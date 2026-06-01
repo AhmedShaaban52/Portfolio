@@ -4,7 +4,6 @@ import { ExternalLink } from "lucide-react";
 import { InteractiveCanvas } from "./InteractiveCanvas";
 import Image from "next/image";
 
-// استيراد الصور الثابتة بشكل صحيح من مجلد public
 import project1 from "@/public/project1.png";
 import project2 from "@/public/project2.png";
 import project3 from "@/public/project3.png";
