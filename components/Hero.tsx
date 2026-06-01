@@ -52,11 +52,11 @@ export function Hero() {
             const spacing = 22;
             for (let x = spacing / 2; x < window.innerWidth; x += spacing) {
                 for (let y = spacing / 2; y < window.innerHeight; y += spacing) {
-                    if (Math.random() > 0.4) { 
+                    if (Math.random() > 0.4) {
                         dotsArray.push({
                             x: x,
                             y: Math.random() * window.innerHeight,
-                            speed: 0.15 + Math.random() * 0.35 
+                            speed: 0.15 + Math.random() * 0.35
                         });
                     }
                 }
@@ -81,7 +81,7 @@ export function Hero() {
                 const dy = dot.y - mouse.y;
                 const distance = Math.sqrt(dx * dx + dy * dy);
 
-                const connectionRange = 130; 
+                const connectionRange = 130;
                 let dotSize = 1.2;
                 let dotColor = baseColor;
 
@@ -132,7 +132,7 @@ export function Hero() {
 
             <div className="pointer-events-none absolute -top-32 right-0 w-[600px] h-[600px] bg-[#00df9a]/5 dark:bg-[#00df9a]/6 rounded-full blur-[120px]" />
 
-            <div className="max-w-7xl mx-auto px-6 w-full py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-20">
+            <div className="w-full md:w-10/12 mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-20">
 
                 <div className="flex flex-col items-start space-y-6">
 
@@ -172,11 +172,11 @@ export function Hero() {
                     </div>
 
                     {/* Profile ring */}
-                    <div className="relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px] rounded-full overflow-hidden  border-[10px] border-zinc-200 dark:border-zinc-900  ring-1 ring-black/5 dark:ring-white/5  shadow-2xl shadow-black/20 dark:shadow-black/80  bg-zinc-100 dark:bg-zinc-950">
+                    <div className="relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] lg:w-[480px] lg:h-[480px] rounded-full overflow-hidden  border-[10px] border-zinc-200 dark:border-zinc-900  ring-1 ring-black/5 dark:ring-white/5  shadow-2xl shadow-black/20 dark:shadow-black/80  bg-zinc-100 dark:bg-zinc-950">
                         <Image
                             src={HeroImage}
                             alt="Portfolio"
-                            className="w-full h-full object-cover object-top scale-105"
+                            className="w-full h-full object-contain"
                         />
                     </div>
 

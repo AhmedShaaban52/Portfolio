@@ -16,7 +16,7 @@ const NAV_LINKS = [
 export function Navbar() {
     return (
         <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-background/80 border-b border-border/40">
-            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div className="w-10/12 mx-auto px-6 h-16 flex items-center justify-between">
 
                 <Link
                     href="#home"
@@ -31,17 +31,13 @@ export function Navbar() {
                 {/* Center Nav Links */}
                 <nav className="hidden md:flex items-center gap-0.5">
                     {NAV_LINKS.map((link, i) => (
-                        <a
+                        <Link
                             key={link.href}
                             href={link.href}
-                            className={`text-sm font-medium px-4 py-2 rounded-md transition-colors duration-150
-                ${i === 0
-                                    ? "text-foreground"
-                                    : "text-muted-foreground hover:text-foreground"
-                                }`}
+                            className={`text-sm font-medium px-4 py-2 rounded-md transition-colors duration-150 ${i === 0 ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
                         >
                             {link.label}
-                        </a>
+                        </Link>
                     ))}
                 </nav>
 
