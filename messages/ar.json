@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "about": "عني",
+    "projects": "المشاريع",
+    "experience": "الخبرة",
+    "contact": "تواصل",
+    "downloadCV": "تحميل السيرة الذاتية"
+  },
+  "hero": {
+    "badge": "مطور متكامل • متخصص Next.js",
+    "title": "بناء تجارب ويب حديثة بـ",
+    "titleAccent": "كود نظيف",
+    "description": "أصمم وأبني تطبيقات ويب قابلة للتوسع باستخدام Next.js و TypeScript و Supabase.",
+    "getInTouch": "تواصل معي",
+    "viewProjects": "عرض المشاريع"
+  },
+  "about": {
+    "label": "عني",
+    "title": "شغوف ببناء",
+    "titleAccent": "الواقع الرقمي",
+    "desc1": "أنا مطور متكامل متخصص في بناء تطبيقات ويب سريعة وقابلة للتوسع.",
+    "desc2": "أهتم بالكود النظيف والأداء المُحسَّن.",
+    "stats": {
+      "years": "سنوات الخبرة",
+      "projects": "مشاريع منجزة",
+      "clients": "عملاء سعداء"
+    }
+  },
+  "projects": {
+    "label": "أعمال مميزة",
+    "title": "مشاريع",
+    "titleAccent": "مختارة",
+    "viewAll": "عرض الكل على GitHub",
+    "code": "الكود",
+    "demo": "عرض مباشر",
+    "featured": "مميز"
+  },
+  "contact": {
+    "label": "تواصل",
+    "title": "لنعمل",
+    "titleAccent": "معاً",
+    "desc": "هل لديك مشروع؟ أرسل لي رسالة!",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "subject": "الموضوع",
+    "message": "الرسالة",
+    "send": "إرسال الرسالة",
+    "namePlaceholder": "اسمك",
+    "emailPlaceholder": "بريدك@example.com",
+    "subjectPlaceholder": "استفسار عن مشروع...",
+    "messagePlaceholder": "أخبرني عن مشروعك...",
+    "location": "القاهرة، مصر",
+    "phone": "+20 100 000 0000"
+  }
+}

@@ -4,16 +4,13 @@ import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "./ModeToggle";
 import Link from "next/link";
+import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useTrans } from "@/hooks/useTrans";
 
-const NAV_LINKS = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#projects", label: "Projects" },
-    { href: "#experience", label: "Experience" },
-    { href: "#contact", label: "Contact" },
-];
-
+const NAV_KEYS = ["home", "about", "projects", "experience", "contact"] as const;
+const NAV_HREFS = ["#home", "#about", "#projects", "#experience", "#contact"];
 export function Navbar() {
+    const { t } = useTrans("nav");
     return (
         <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-background/80 border-b border-border/40">
             <div className="w-10/12 mx-auto px-6 h-16 flex items-center justify-between">
@@ -28,27 +25,26 @@ export function Navbar() {
                     Next<span className="text-[#00df9a]">Dev</span>
                 </Link>
 
-                {/* Center Nav Links */}
                 <nav className="hidden md:flex items-center gap-0.5">
-                    {NAV_LINKS.map((link, i) => (
+                    {NAV_KEYS.map((key, i) => (
                         <Link
-                            key={link.href}
-                            href={link.href}
+                            key={key}
+                            href={NAV_HREFS[i]}
                             className={`text-sm font-medium px-4 py-2 rounded-md transition-colors duration-150 ${i === 0 ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
                         >
-                            {link.label}
+                            {t(key)}
                         </Link>
                     ))}
                 </nav>
 
-                {/* Right Actions */}
                 <div className="flex items-center gap-3 shrink-0">
+                    <LanguageSwitcher />
                     <ModeToggle />
                     <Button
                         className="bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-semibold rounded-full h-9 px-5 gap-2 text-xs tracking-wide transition-all active:scale-95 shadow-[0_0_24px_rgba(0,223,154,0.18)]"
                     >
                         <Download className="w-3.5 h-3.5 stroke-[2.5]" />
-                        Download CV
+                        {t("downloadCV")}
                     </Button>
                 </div>
 

@@ -1,0 +1,56 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "experience": "Experience",
+    "contact": "Contact",
+    "downloadCV": "Download CV"
+  },
+  "hero": {
+    "badge": "Fullstack Developer • Next.js Specialist",
+    "title": "Building modern web experiences with",
+    "titleAccent": "clean code",
+    "description": "I design and build scalable fullstack applications using modern technologies like Next.js, TypeScript, and Supabase.",
+    "getInTouch": "Get in touch",
+    "viewProjects": "View projects"
+  },
+  "about": {
+    "label": "About Me",
+    "title": "Passionate about building",
+    "titleAccent": "digital reality",
+    "desc1": "I'm a fullstack developer specialized in building fast, scalable web applications.",
+    "desc2": "I care deeply about clean code and optimized performance.",
+    "stats": {
+      "years": "Years Experience",
+      "projects": "Projects Shipped",
+      "clients": "Happy Clients"
+    }
+  },
+  "projects": {
+    "label": "Featured Work",
+    "title": "Selected",
+    "titleAccent": "Projects",
+    "viewAll": "View all on GitHub",
+    "code": "Code",
+    "demo": "Live Demo",
+    "featured": "FEATURED"
+  },
+  "contact": {
+    "label": "Contact",
+    "title": "Let's Work",
+    "titleAccent": "Together",
+    "desc": "Have a project in mind? Drop me a message!",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send Message",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "subjectPlaceholder": "Project inquiry...",
+    "messagePlaceholder": "Tell me about your project...",
+    "location": "Cairo, Egypt",
+    "phone": "+20 100 000 0000"
+  }
+}

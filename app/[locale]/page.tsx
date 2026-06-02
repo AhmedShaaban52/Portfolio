@@ -1,4 +1,3 @@
-
 import { About } from "@/components/About";
 import { Contact } from "@/components/Contact";
 import { ExperienceSkills } from "@/components/ExperienceSkills";
