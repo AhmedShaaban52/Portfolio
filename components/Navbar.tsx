@@ -8,7 +8,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTrans } from "@/hooks/useTrans";
 
 const NAV_KEYS = ["home", "about", "projects", "experience", "contact"] as const;
-const NAV_HREFS = ["#home", "#about", "#projects", "#experience"];
+const NAV_HREFS = ["#home", "#about", "#projects", "#experience", "#contact"];
 export function Navbar() {
     const { t } = useTrans("nav");
     return (
