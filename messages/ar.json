@@ -5,7 +5,9 @@
     "projects": "المشاريع",
     "experience": "الخبرة",
     "contact": "تواصل",
-    "downloadCV": "تحميل السيرة الذاتية"
+    "downloadCV": "تحميل السيرة الذاتية",
+    "testWord": "[AR] Test Word",
+    "testWordaaaa": "[AR] Test Wordaaaa"
   },
   "hero": {
     "badge": "مطور متكامل • متخصص Next.js",
