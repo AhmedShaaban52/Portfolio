@@ -6,6 +6,7 @@ import { ModeToggle } from "./ModeToggle";
 import Link from "next/link";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTrans } from "@/hooks/useTrans";
+import Logo from "./Logo";
 
 const NAV_KEYS = ["home", "about", "projects", "experience", "contact"] as const;
 const NAV_HREFS = ["#home", "#about", "#projects", "#experience", "#contact"];
@@ -15,7 +16,7 @@ export function Navbar() {
         <header className="sticky top-0 z-50 w-full backdrop-blur-md bg-background/80 border-b border-border/40">
             <div className="w-10/12 mx-auto px-6 h-16 flex items-center justify-between">
 
-                <Link
+                {/* <Link
                     href="#home"
                     className="text-lg font-bold tracking-tight text-foreground flex items-center gap-1.5 select-none shrink-0"
                 >
@@ -23,7 +24,8 @@ export function Navbar() {
                         {"</>"}
                     </span>
                     Next<span className="text-[#00df9a]">Dev</span>
-                </Link>
+                </Link> */}
+                <Logo/>
 
                 <nav className="hidden md:flex items-center gap-0.5">
                     {NAV_KEYS.map((key, i) => (

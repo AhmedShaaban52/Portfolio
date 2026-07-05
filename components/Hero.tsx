@@ -2,13 +2,13 @@
 
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import HeroImage from "@/public/hero.png";
+import HeroImage from "@/public/hero.jpg";
 import Image from "next/image";
 import { InteractiveCanvas } from "@/components/InteractiveCanvas";
 import { useTrans } from "@/hooks/useTrans";
 
 export function Hero() {
-    const { t } = useTrans("nav");
+    const { t } = useTrans("hero");
     return (
         <section
             id="home"
@@ -22,31 +22,30 @@ export function Hero() {
 
                 <div className="flex flex-col items-start space-y-6">
 
-                    {/* Badge */}
                     <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium tracking-wide  bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20  dark:bg-[#00df9a]/5 dark:border-[#00df9a]/15">
-                        {t("Fullstack Developer • Next.js Specialist")}
+                        {t("fullstack-developer-nextjs-specialist")}
                     </span>
 
-                    <h1 className="text-[42px] sm:text-5xl md:text-6xl lg:text-[64px] font-bold leading-[1.1] tracking-tight text-foreground">
-                        Building modern web experiences with{" "}
-                        <span className="text-[#00df9a]">clean code</span>
+                    <h1 className="font-bold leading-[1.15] tracking-tight text-foreground">
+                        <span className="block text-[32px] sm:text-5xl md:text-6xl lg:text-[64px] leading-[1.1]">
+                            {t("building-modern-web-experiences-with")}{" "}
+                            <span className="text-[#00df9a]">{t("clean-code")}</span>
+                        </span>
                     </h1>
 
                     <p className="text-muted-foreground text-sm sm:text-base max-w-120 leading-relaxed">
-                        I design and build scalable fullstack applications using modern
-                        technologies like Next.js, TypeScript, and Supabase. Focused on
-                        performance, clean UI, and real-world products.
+                        {t("i-design-and-build-scalable-fullstack-applications")}
                     </p>
 
                     {/* Buttons */}
                     <div className="flex items-center gap-4 pt-1">
                         <Button className="bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-semibold h-12 px-7 rounded-full text-sm gap-2 transition-all active:scale-95 shadow-[0_4px_24px_rgba(0,223,154,0.2)]">
-                            Get in touch
+                            {t("get-in-touch")}
                             <ArrowRight className="w-4 h-4 stroke-[2.5]" />
                         </Button>
 
                         <Button variant="ghost" className="h-12 px-6 rounded-full text-sm font-medium text-foreground hover:bg-muted hover:text-foreground transition-all">
-                            View projects
+                            {t("view-projects")}
                         </Button>
                     </div>
 
@@ -62,7 +61,6 @@ export function Hero() {
                             src={HeroImage}
                             alt="Portfolio"
                             fill
-                            // sizes="(max-width: 640px) 14rem, (max-width: 1024px) 18rem, 20rem"
                             className="object-center transition-transform duration-500 hover:scale-105"
                             priority
                         />

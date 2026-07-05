@@ -6,10 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "i18n:sync": "node scripts/sync-translations.cjs",
-    "i18n:check": "node scripts/sync-translations.cjs --check",
-    "i18n:watch": "node scripts/watch-translations.cjs"
+    "lint": "eslint"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",
