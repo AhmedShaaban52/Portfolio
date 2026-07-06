@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { InteractiveCanvas } from "./InteractiveCanvas";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTrans } from "@/hooks/useTrans";
+import Link from "next/link";
 
 function GithubIcon({ className }: { className?: string }) {
     return (
@@ -21,6 +23,15 @@ function LinkedinIcon({ className }: { className?: string }) {
     );
 }
 
+function WhatsappIcon({ className }: { className?: string }) {
+    return (
+        <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+            <path d="M12.001 2C6.478 2 2 6.478 2 12c0 1.851.505 3.586 1.382 5.07L2 22l5.077-1.352A9.94 9.94 0 0 0 12.001 22C17.523 22 22 17.522 22 12S17.523 2 12.001 2zm0 18.161a8.13 8.13 0 0 1-4.152-1.135l-.298-.177-3.086.822.825-3.011-.194-.309a8.128 8.128 0 0 1-1.24-4.351c0-4.495 3.655-8.151 8.15-8.151 4.494 0 8.151 3.655 8.151 8.15 0 4.495-3.657 8.162-8.156 8.162z" />
+        </svg>
+    );
+}
+
 const CONTACT_INFO = [
     { icon: Mail, labelKey: "email", valueKey: "email-value" },
     { icon: MapPin, labelKey: "location", valueKey: "cairo-egypt" },
@@ -28,12 +39,28 @@ const CONTACT_INFO = [
 ];
 
 const SOCIALS = [
-    { labelKey: "github", icon: GithubIcon, href: "#" },
-    { labelKey: "linkedin", icon: LinkedinIcon, href: "#" },
+    { labelKey: "whatsapp", icon: WhatsappIcon, href: "https://wa.me/201024400646" },
+    { labelKey: "linkedin", icon: LinkedinIcon, href: "https://www.linkedin.com/in/ahmed-shaaban52/" },
+    { labelKey: "github", icon: GithubIcon, href: "https://github.com/AhmedShaaban52" },
+
 ];
 
 export function Contact() {
     const { t } = useTrans("contact");
+    const [form, setForm] = useState({ name: "", email: "", subject: "", message: "" });
+
+    function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+        const { name, value } = e.target;
+        setForm(prev => ({ ...prev, [name]: value }));
+    }
+
+    function handleSend() {
+        const recipient = "ahmedshababn91@gmail.com";
+        const subject = form.subject || "Project Inquiry";
+        const body = `Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`;
+        const mailto = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+    }
 
     return (
         <section
@@ -77,7 +104,7 @@ export function Contact() {
 
                         <div className="flex flex-col gap-4">
                             {CONTACT_INFO.map(({ icon: Icon, labelKey, valueKey }) => (
-                                <div key={labelKey} className="flex items-center gap-4 p-4 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/60 hover:border-[#00df9a]/30 transition-all duration-200 group">
+                                <div key={labelKey} className="flex items-center gap-4 p-4 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/60 hover:border-[#00df9a]/30 transition-all duration-200 group cursor-pointer">
                                     <div className="p-2.5 rounded-xl bg-[#00df9a]/10 text-[#00df9a] group-hover:bg-[#00df9a] group-hover:text-black transition-all duration-200">
                                         <Icon className="w-4 h-4" />
                                     </div>
@@ -92,10 +119,10 @@ export function Contact() {
                         <div className="flex items-center gap-3 pt-2">
                             <span className="text-xs text-muted-foreground">{t("find-me-on")}</span>
                             {SOCIALS.map(({ labelKey, icon: Icon, href }) => (
-                                <a key={labelKey} href={href} aria-label={t(labelKey)}
+                                <Link key={labelKey} href={href} aria-label={t(labelKey)} target="_blank"
                                     className="p-2.5 rounded-xl bg-card/40 border border-border/60 text-muted-foreground  hover:border-[#00df9a]/40 hover:text-[#00df9a] hover:bg-[#00df9a]/5 transition-all duration-200">
                                     <Icon className="w-4 h-4" />
-                                </a>
+                                </Link>
                             ))}
                         </div>
                     </div>
@@ -104,29 +131,56 @@ export function Contact() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-xs font-medium text-muted-foreground">{t("name")}</label>
-                                <input type="text" placeholder={t("your-name")}
-                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200" />
+                                <input
+                                    type="text"
+                                    name="name"
+                                    value={form.name}
+                                    onChange={handleChange}
+                                    placeholder={t("your-name")}
+                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200"
+                                />
                             </div>
                             <div className="flex flex-col gap-1.5">
                                 <label className="text-xs font-medium text-muted-foreground">{t("email")}</label>
-                                <input type="email" placeholder={t("your-email-com")}
-                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200" />
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
+                                    placeholder={t("enter-your-email")}
+                                    className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200"
+                                />
                             </div>
                         </div>
 
                         <div className="flex flex-col gap-1.5 mb-4">
                             <label className="text-xs font-medium text-muted-foreground">{t("subject")}</label>
-                            <input type="text" placeholder={t("project-inquiry")}
-                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200" />
+                            <input
+                                type="text"
+                                name="subject"
+                                value={form.subject}
+                                onChange={handleChange}
+                                placeholder={t("project-inquiry")}
+                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200"
+                            />
                         </div>
 
                         <div className="flex flex-col gap-1.5 mb-6">
                             <label className="text-xs font-medium text-muted-foreground">{t("message")}</label>
-                            <textarea rows={5} placeholder={t("tell-me-about-your-project")}
-                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200 resize-none" />
+                            <textarea
+                                name="message"
+                                rows={5}
+                                value={form.message}
+                                onChange={handleChange}
+                                placeholder={t("tell-me-about-your-project")}
+                                className="bg-background/60 border border-border rounded-xl px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-[#00df9a] focus:ring-2 focus:ring-[#00df9a]/10 transition-all duration-200 resize-none"
+                            />
                         </div>
 
-                        <Button className="w-full bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-bold h-12 rounded-xl gap-2 text-sm transition-all active:scale-[0.98] shadow-[0_4px_24px_rgba(0,223,154,0.2)]">
+                        <Button
+                            onClick={handleSend}
+                            className="w-full bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-bold h-12 rounded-xl gap-2 text-sm transition-all active:scale-[0.98] shadow-[0_4px_24px_rgba(0,223,154,0.2)]"
+                        >
                             <Send className="w-4 h-4" />
                             {t("send-message")}
                         </Button>

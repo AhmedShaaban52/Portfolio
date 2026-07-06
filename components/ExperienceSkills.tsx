@@ -5,51 +5,62 @@ import { useTrans } from "@/hooks/useTrans";
 
 const SKILLS = [
     { name: "Next.js", categoryKey: "frontend" },
+    { name: "Tanstack", categoryKey: "frontend" },
     { name: "React", categoryKey: "frontend" },
     { name: "TypeScript", categoryKey: "frontend" },
+    { name: "JavaScript", categoryKey: "frontend" },
     { name: "Tailwind CSS", categoryKey: "frontend" },
+    { name: "Redux", categoryKey: "frontend" },
+    { name: "Framer Motion", categoryKey: "frontend" },
     { name: "Node.js", categoryKey: "backend" },
+    { name: "Express.js", categoryKey: "backend" },
     { name: "PostgreSQL", categoryKey: "backend" },
+    { name: "MongoDB", categoryKey: "backend" },
     { name: "Supabase", categoryKey: "backend" },
     { name: "Prisma", categoryKey: "backend" },
+    { name: "Drizzle", categoryKey: "backend" },
+    { name: "REST APIs", categoryKey: "backend" },
     { name: "Git / GitHub", categoryKey: "tools" },
+    { name: "React Query", categoryKey: "tools" },
     { name: "Figma", categoryKey: "tools" },
     { name: "Vercel", categoryKey: "tools" },
     { name: "Docker", categoryKey: "tools" },
+    { name: "Postman", categoryKey: "tools" },
 ];
 
 const CATEGORY_KEYS = ["frontend", "backend", "tools"] as const;
 
 const EXPERIENCE = [
     {
-        roleKey: "senior-frontend-developer",
-        companyKey: "company-name",
-        periodKey: "period-2022-present",
-        descKey: "led-a-team-of-developers",
+        roleKey: "full-stack-developer",
+        companyKey: "exabyte-llc",
+        periodKey: "period-2025-present",
+        descKey: "full-stack-developer-desc",
         current: true,
     },
     {
-        roleKey: "fullstack-developer",
-        companyKey: "startup-studio",
-        periodKey: "period-2020-2022",
-        descKey: "developed-various-mvp-products",
+        roleKey: "backend-developer",
+        companyKey: "exabyte-llc",
+        periodKey: "period-aug-2025-present",
+        descKey: "backend-developer-desc",
         current: false,
     },
     {
         roleKey: "frontend-developer",
-        companyKey: "freelance",
-        periodKey: "period-2018-2020",
-        descKey: "delivered-15-plus-client-projects",
+        companyKey: "exabyte-llc",
+        periodKey: "period-jun-2024-present",
+        descKey: "frontend-developer-desc",
         current: false,
     },
 ];
 
 export function ExperienceSkills() {
-    const { t } = useTrans("experience");
+    const { t, dir } = useTrans("experience");
 
     return (
         <section
             id="experience"
+            dir={dir}
             className="relative py-32 overflow-hidden border-t border-border/40 bg-transparent"
         >
             <div className="absolute inset-0 overflow-hidden pointer-events-none z-0 opacity-30 dark:opacity-50">
@@ -97,7 +108,6 @@ export function ExperienceSkills() {
                         </div>
                     </div>
 
-                    {/* Experience */}
                     <div>
                         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-10">
                             {t("work")} <span className="text-[#00df9a]">{t("experience")}</span>

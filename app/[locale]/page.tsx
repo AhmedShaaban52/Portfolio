@@ -9,12 +9,14 @@ export default function Home() {
   return (
     <div className="relative min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 flex flex-col">
-        <Hero />
-        <About />
-        <Projects />
-        <ExperienceSkills />
-        <Contact />
+      <main className="flex-1 flex flex-col items-center">
+        <div className="w-full md:max-w-5xl px-2 md:px-0">
+          <Hero />
+          <About />
+          <Projects />
+          <ExperienceSkills />
+          <Contact />
+        </div>
       </main>
     </div>
   );

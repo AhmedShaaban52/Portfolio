@@ -11,18 +11,19 @@ const FEATURES = [
 ];
 
 export function About() {
-    const { t } = useTrans("about");
+    const { t, dir } = useTrans("about");
 
     return (
         <section
             id="about"
+            dir={dir}
             className="relative py-28 bg-background overflow-hidden border-t border-border/40"
         >
             <InteractiveCanvas />
 
             <div className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 size-125 bg-[#00df9a]/5 rounded-full blur-[120px]" />
             <div className="w-10/12 mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-                <div className="lg:col-span-7 flex flex-col items-start space-y-6 text-left">
+                <div className="lg:col-span-7 flex flex-col items-start space-y-6 text-start">
                     <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium tracking-wide bg-[#00df9a]/10 text-[#00df9a] border border-[#00df9a]/20">
                         {t("my-story")}
                     </span>
@@ -31,11 +32,11 @@ export function About() {
                         {t("passionate-about-weaving-tech-design-into")} <span className="text-[#00df9a]">{t("digital-reality")}</span>
                     </h2>
 
-                    <p className="text-muted-foreground text-base leading-relaxed max-w-2xl">
+                    <p className="text-muted-foreground text-base leading-relaxed max-w-2xl text-start">
                         {t("i-am-a-fullstack-software-developer")}
                     </p>
 
-                    <p className="text-muted-foreground text-base leading-relaxed max-w-2xl">
+                    <p className="text-muted-foreground text-base leading-relaxed max-w-2xl text-start">
                         {t("i-deeply-care-about-user-experience")}
                     </p>
                 </div>
