@@ -8,10 +8,11 @@ import { InteractiveCanvas } from "@/components/InteractiveCanvas";
 import { useTrans } from "@/hooks/useTrans";
 
 export function Hero() {
-    const { t } = useTrans("hero");
+    const { t, dir } = useTrans("hero");
     return (
         <section
             id="home"
+            dir={dir}
             className="relative min-h-[calc(100vh-68px)] flex items-center overflow-hidden bg-background"
         >
             <InteractiveCanvas />
@@ -20,7 +21,7 @@ export function Hero() {
 
             <div className="w-full md:w-10/12 mx-auto px-6 py-10 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-20">
 
-                <div className="flex flex-col items-center lg:items-start text-center lg:text-left space-y-6 order-2 lg:order-1">
+                <div className="flex flex-col items-center lg:items-start text-center lg:text-start space-y-6 order-2 lg:order-1">
                     <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium tracking-wide bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20 dark:bg-[#00df9a]/5 dark:border-[#00df9a]/15">
                         {t("fullstack-developer-nextjs-specialist")}
                     </span>
