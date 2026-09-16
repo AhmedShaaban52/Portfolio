@@ -9,6 +9,7 @@ import project1 from "@/public/project1.png";
 import project2 from "@/public/project2.png";
 import project3 from "@/public/project3.png";
 import project4 from "@/public/project4.png";
+import project5 from "@/public/project5.png";
 
 function GithubIcon({ className }: { className?: string }) {
     return (
@@ -29,9 +30,18 @@ const PROJECTS = [
         featured: true,
     },
     {
+        titleKey: "pizza-craft",
+        descKey: "pizza-craft-desc",
+        image: project2,
+        github: "#",
+        demo: "https://pizza-craft-virid.vercel.app/",
+        tags: ["Next.js", "TypeScript", "Drizzle ORM","NeonDb", "Better Auth", "Stripe"],
+        featured: false,
+    },
+    {
         titleKey: "learnu",
         descKey: "learnu-desc",
-        image: project2,
+        image: project3,
         github: "#",
         demo: "https://exabyte-eg.com/learnu",
         tags: ["React", "Tailwind CSS", "Ant Design", "RESTful APIs", "PHP", "Laravel"],
@@ -40,7 +50,7 @@ const PROJECTS = [
     {
         titleKey: "istikbal-elite",
         descKey: "istikbal-elite-desc",
-        image: project3,
+        image: project4,
         github: "#",
         demo: "https://exabyte-eg.com/istikbal",
         tags: ["React", "Tailwind CSS", "Ant Design", "RESTful APIs", "PHP", "Laravel"],
@@ -49,14 +59,13 @@ const PROJECTS = [
     {
         titleKey: "sarar-egypt",
         descKey: "sarar-egypt-desc",
-        image: project4,
+        image: project5,
         github: "#",
         demo: "https://sararegypt.com",
         tags: ["React", "Tailwind CSS", "Ant Design", "RESTful APIs", "PHP", "Laravel"],
         featured: false,
     },
 ];
-
 export function Projects() {
     const { t } = useTrans("projects");
 

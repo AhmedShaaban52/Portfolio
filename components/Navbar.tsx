@@ -55,6 +55,7 @@ export function Navbar() {
 }
 
 function DownloadButton() {
+    const { t } = useTrans("nav");
     return (
         <Button
             asChild 
@@ -62,7 +63,7 @@ function DownloadButton() {
         >
             <a href="https://drive.google.com/uc?id=1GkmPLF0HooJqZLS5s1PeEH8zQ37zj9fH&export=download" target="_blank" rel="noopener noreferrer">
                 <Download className="w-3.5 h-3.5" />
-                Download CV
+               {t("download-cv")}
             </a>
         </Button>
     );

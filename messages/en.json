@@ -5,7 +5,7 @@
     "projects": "Projects",
     "experience": "Experience",
     "contact": "Contact",
-    "downloadCV": "Download CV"
+    "download-cv": "Download CV"
   },
   "hero": {
     "fullstack-developer-nextjs-specialist": "Fullstack Developer • Next.js Specialist",
@@ -38,6 +38,8 @@
     "featured": "FEATURED",
     "temry-market": "Temry Market",
     "temry-market-desc": "An integrated e-commerce platform for Temry food products, featuring advanced branch pickup logistics, customer loyalty surveys, and seamless user experience.",
+    "pizza-craft": "Pizza Craft",
+    "pizza-craft-desc": "A custom pizza ordering e-commerce platform with fully configurable toppings, built with integrated authentication, real-time checkout via Stripe, product image uploads through UploadThing, and a Postgres database on Neon powered by Drizzle ORM.",
     "learnu": "Learnu",
     "learnu-desc": "A knowledge management system (LMS) designed for engineering courses. Built entirely on robust course management, a student enrollment program supporting a large number of students, detailed progress tracking, and an interactive instructor dashboard with advanced analytics",
     "istikbal-elite": "Istikbal Elite",
