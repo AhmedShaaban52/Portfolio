@@ -1,13 +1,13 @@
 "use client";
 
-import { Download, Menu } from "lucide-react"; // Added Menu icon
+import { Download, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "./ModeToggle";
 import Link from "next/link";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTrans } from "@/hooks/useTrans";
 import Logo from "./Logo";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet"; 
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
 const NAV_KEYS = ["home", "about", "projects", "experience", "contact"] as const;
 const NAV_HREFS = ["#home", "#about", "#projects", "#experience", "#contact"];
@@ -20,7 +20,7 @@ export function Navbar() {
             <div className="container mx-auto px-4 h-16 flex items-center justify-between">
                 <Logo />
 
-                <nav className="hidden md:flex items-center gap-0.5">
+                <nav className="hidden lg:flex items-center gap-0.5">
                     {NAV_KEYS.map((key, i) => (
                         <Link key={key} href={NAV_HREFS[i]} className="text-sm font-medium px-4 py-2 rounded-md hover:text-foreground text-muted-foreground">
                             {t(key)}
@@ -28,23 +28,32 @@ export function Navbar() {
                     ))}
                 </nav>
 
-                <div className="md:hidden">
+                <div className="lg:hidden">
                     <Sheet>
                         <SheetTrigger asChild>
-                            <Button variant="ghost" size="icon"><Menu /></Button>
+                            <Button variant="ghost" size="icon" className="cursor-pointer"><Menu /></Button>
                         </SheetTrigger>
                         <SheetContent side="right">
                             <SheetTitle className="sr-only">Menu</SheetTitle>
                             <div className="flex flex-col gap-4 p-8 mt-8">
                                 {NAV_KEYS.map((key, i) => (
-                                    <Link key={key} href={NAV_HREFS[i]} className="text-lg font-medium">{t(key)}</Link>
+                                    <Link key={key} href={NAV_HREFS[i]} className="text-lg font-medium hover:text-foreground text-muted-foreground">
+                                        {t(key)}
+                                    </Link>
                                 ))}
+
+                                <div className="flex items-center gap-3">
+                                    <LanguageSwitcher />
+                                    <ModeToggle />
+                                </div>
+
+                                <DownloadButton className="w-full justify-center mt-1" />
                             </div>
                         </SheetContent>
                     </Sheet>
                 </div>
 
-                <div className="hidden md:flex items-center gap-3 shrink-0">
+                <div className="hidden lg:flex items-center gap-3 shrink-0">
                     <LanguageSwitcher />
                     <ModeToggle />
                     <DownloadButton />
@@ -54,16 +63,16 @@ export function Navbar() {
     );
 }
 
-function DownloadButton() {
+function DownloadButton({ className }: { className?: string }) {
     const { t } = useTrans("nav");
     return (
         <Button
-            asChild 
-            className="bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-semibold rounded-full h-9 px-5 gap-2 text-xs"
+            asChild
+            className={`bg-[#00df9a] hover:bg-[#00df9a]/85 text-black font-semibold rounded-full h-9 px-5 gap-2 text-xs ${className ?? ""}`}
         >
             <a href="https://drive.google.com/uc?id=1GkmPLF0HooJqZLS5s1PeEH8zQ37zj9fH&export=download" target="_blank" rel="noopener noreferrer">
                 <Download className="w-3.5 h-3.5" />
-               {t("download-cv")}
+                {t("download-cv")}
             </a>
         </Button>
     );

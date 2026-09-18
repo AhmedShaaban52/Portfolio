@@ -81,7 +81,7 @@ export function Contact() {
 
             <div className="pointer-events-none absolute -left-32 top-1/2 -translate-y-1/2 size-125 bg-[#00df9a]/5 rounded-full blur-[120px] z-10" />
 
-            <div className="w-11/12 md:max-w-7xl mx-auto px-6 relative z-10">
+            <div className="w-11/12 md:max-w-7xl mx-auto px-4 md:px-6 relative z-10">
                 <div className="flex items-center gap-3 mb-4">
                     <span className="text-[#00df9a] font-mono text-sm font-bold">04.</span>
                     <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
@@ -104,13 +104,16 @@ export function Contact() {
 
                         <div className="flex flex-col gap-4">
                             {CONTACT_INFO.map(({ icon: Icon, labelKey, valueKey }) => (
-                                <div key={labelKey} className="flex items-center gap-4 p-4 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/60 hover:border-[#00df9a]/30 transition-all duration-200 group cursor-pointer">
-                                    <div className="p-2.5 rounded-xl bg-[#00df9a]/10 text-[#00df9a] group-hover:bg-[#00df9a] group-hover:text-black transition-all duration-200">
+                                <div
+                                    key={labelKey}
+                                    className="flex items-center gap-4 p-4 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/60 hover:border-[#00df9a]/30 transition-all duration-200 group cursor-pointer"
+                                >
+                                    <div className="shrink-0 p-2.5 rounded-xl bg-[#00df9a]/10 text-[#00df9a] group-hover:bg-[#00df9a] group-hover:text-black transition-all duration-200">
                                         <Icon className="w-4 h-4" />
                                     </div>
-                                    <div>
+                                    <div className="min-w-0 flex-1">
                                         <p className="text-[11px] text-muted-foreground uppercase tracking-wider">{t(labelKey)}</p>
-                                        <p className="text-sm font-medium text-foreground">{t(valueKey)}</p>
+                                        <p className="text-sm font-medium text-foreground wrap-break-word">{t(valueKey)}</p>
                                     </div>
                                 </div>
                             ))}

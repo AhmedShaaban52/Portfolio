@@ -78,7 +78,7 @@ export function Projects() {
 
             <div className="pointer-events-none absolute -left-32 top-1/3 -translate-y-1/2 size-125 bg-[#00df9a]/5 rounded-full blur-[120px]" />
 
-            <div className="w-10/12 mx-auto px-6 relative z-10">
+            <div className="w-10/12 mx-auto px-1 md:px-1 relative z-10">
                 <div className="flex items-center gap-3 mb-4">
                     <span className="text-[#00df9a] font-mono text-sm font-bold">02.</span>
                     <span className="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-medium bg-[#00df9a]/8 text-[#00df9a] border border-[#00df9a]/20">
