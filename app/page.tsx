@@ -1,17 +1,19 @@
+import dynamic from "next/dynamic";
 import Hero from "@/components/Hero/Hero";
 import Section from "@/components/AboutMe/Section";
-import Skills from "@/components/Skills/Skills";
-import MyProjects from "@/components/MyProjects/MyProjects";
-import Contact from "@/components/Contact/Contact";
+
+const Skills = dynamic(() => import("@/components/Skills/Skills"), {ssr: false,});
+const MyProjects = dynamic(() => import("@/components/MyProjects/MyProjects"), {ssr: false,});
+const Contact = dynamic(() => import("@/components/Contact/Contact"), {ssr: false,});
 
 export default function Home() {
   return (
-  <div>
-    <Hero/>
-    <Section/>
-    <Skills />
-    <MyProjects />
-    <Contact />
-  </div>
+    <div>
+      <Hero />
+      <Section />
+      <Skills />
+      <MyProjects />
+      <Contact />
+    </div>
   );
 }
