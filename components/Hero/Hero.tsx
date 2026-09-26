@@ -72,7 +72,7 @@ const Hero = () => {
             </div>
             <div className="absolute bottom-6 right-6 md:bottom-10 md:right-12 z-30">
                 <a href="#contact" className="flex items-center gap-2 text-[10px] font-semibold tracking-[0.2em] text-blue-500 hover:text-blue-400 transition-colors group">
-                    <span>LET'S TALK</span>
+                    <span>LET&apos;S TALK</span>
                     <ArrowUpRight size={14} className="group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform" />
                 </a>
             </div>
