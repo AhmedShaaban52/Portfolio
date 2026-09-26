@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const SITE_URL = "https://ahmed-portfolio-git-main-ahmeds-projects-22e75af4.vercel.app/";
+const SITE_URL = "https://ahmed-portfolio-nine-phi.vercel.app/";
 const SITE_NAME = "Ahmed Shaaban - Full-stack Web Developer";
 const SITE_DESCRIPTION =
   "Portfolio of Ahmed Shaaban, a full-stack web developer building fast, accessible e-commerce and web applications with React, Next.js, TypeScript and Laravel.";
