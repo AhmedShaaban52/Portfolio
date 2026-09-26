@@ -1,9 +1,8 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import type { CSSProperties, MouseEvent } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion, useReducedMotion } from 'framer-motion'
 import { FaGithub } from 'react-icons/fa'
 import type { IconType } from 'react-icons'
 import { FiExternalLink } from 'react-icons/fi'
@@ -11,11 +10,11 @@ import { projects } from './projectsObject'
 import Image from 'next/image'
 import type { StaticImageData } from 'next/image'
 
-gsap.registerPlugin(ScrollTrigger)
-
 const GITHUB_PROFILE = ''
 
 const ACCENTS = ['#3b82f6', '#f97316', '#06b6d4', "#0E56A2", "#EAB308"]
+
+const EASE = [0.22, 1, 0.36, 1] as const
 
 interface ProjectSkill {
   name: string
@@ -57,13 +56,17 @@ interface ProjectShowcaseProps {
 const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
   const tiltRef = useRef<HTMLDivElement>(null)
   const [tipOpen, setTipOpen] = useState(false)
+  const reduceMotion = useReducedMotion()
   const accent = project.color || ACCENTS[index % ACCENTS.length]
   const reversed = index % 2 === 1
+  const dir = index % 2 === 0 ? -1 : 1
   const { name, description, img, live, github, skills = [] } = project
+
 
   const handleMove = (e: MouseEvent<HTMLDivElement>) => {
     const el = tiltRef.current
     if (!el) return
+    if (reduceMotion) return
     if (!window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) return
 
     const rect = el.getBoundingClientRect()
@@ -72,21 +75,13 @@ const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
 
     el.style.setProperty('--mx', `${px * 100}%`)
     el.style.setProperty('--my', `${py * 100}%`)
-
-    gsap.to(el, {
-      rotateY: (px - 0.5) * 10,
-      rotateX: -(py - 0.5) * 10,
-      transformPerspective: 900,
-      duration: 0.4,
-      ease: 'power2.out',
-      overwrite: 'auto',
-    })
+    el.style.transform = `perspective(900px) rotateY(${(px - 0.5) * 10}deg) rotateX(${-(py - 0.5) * 10}deg)`
   }
 
   const handleLeave = () => {
     const el = tiltRef.current
     if (!el) return
-    gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'power3.out', overwrite: 'auto' })
+    el.style.transform = 'perspective(900px) rotateY(0deg) rotateX(0deg)'
   }
 
   const frame = (
@@ -94,7 +89,7 @@ const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
       ref={tiltRef}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      className="group relative will-change-transform"
+      className="group relative will-change-transform transition-transform duration-500 ease-out"
       style={{ '--c': accent, '--mx': '50%', '--my': '50%' } as CSSProperties}
     >
       <div
@@ -158,12 +153,18 @@ const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
 
   return (
     <article
-      className={`project-row flex flex-col items-center gap-10 lg:gap-16 ${
+      className={`flex flex-col items-center gap-10 lg:gap-16 ${
         reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
       }`}
     >
 
-      <div className="project-frame w-full lg:w-[58%]">
+      <motion.div
+        className="w-full lg:w-[58%]"
+        initial={reduceMotion ? false : { opacity: 0, x: 70 * dir }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1.3, ease: EASE }}
+      >
         {live ? (
           <a
             href={live}
@@ -177,10 +178,17 @@ const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
         ) : (
           frame
         )}
-      </div>
+      </motion.div>
 
 
-      <div className="project-info w-full lg:w-[42%]" style={{ '--c': accent } as CSSProperties}>
+      <motion.div
+        className="w-full lg:w-[42%]"
+        style={{ '--c': accent } as CSSProperties}
+        initial={reduceMotion ? false : { opacity: 0, x: -70 * dir }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 1.3, delay: 0.15, ease: EASE }}
+      >
         <div className="mb-5 h-1 w-12 rounded-full" style={{ background: 'var(--c)' }} />
 
         <h3 className="text-3xl font-bold tracking-tight text-white md:text-4xl">{name}</h3>
@@ -283,74 +291,18 @@ const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
             </a>
           )}
         </div>
-      </div>
+      </motion.div>
     </article>
   )
 }
 
 const MyProjects = () => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const badgeRef = useRef<HTMLDivElement>(null)
-  const titleRef = useRef<HTMLHeadingElement>(null)
-  const subtitleRef = useRef<HTMLParagraphElement>(null)
-
-  useEffect(() => {
-
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const ctx = gsap.context(() => {
-
-      gsap.from([badgeRef.current, titleRef.current, subtitleRef.current], {
-        y: -40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        },
-      })
-
-
-      gsap.utils.toArray<HTMLElement>('.project-row').forEach((row, i) => {
-        const dir = i % 2 === 0 ? -1 : 1
-        const scrollTrigger = {
-          trigger: row,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
-        }
-
-        const frameEl = row.querySelector<HTMLElement>('.project-frame')
-        const infoEl = row.querySelector<HTMLElement>('.project-info')
-
-        gsap.from(frameEl, {
-          x: 70 * dir,
-          opacity: 0,
-          duration: 0.9,
-          ease: 'power3.out',
-          scrollTrigger,
-        })
-        gsap.from(infoEl, {
-          x: -70 * dir,
-          opacity: 0,
-          duration: 0.9,
-          delay: 0.1,
-          ease: 'power3.out',
-          scrollTrigger,
-        })
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+  const reduceMotion = useReducedMotion()
 
   return (
     <section
       id="projects"
       className="relative flex flex-col gap-8 overflow-hidden bg-[#07070a] px-4 py-24 md:px-8"
-      ref={sectionRef}
     >
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
@@ -365,29 +317,41 @@ const MyProjects = () => {
       <div className="pointer-events-none absolute bottom-20 left-10 size-100 rounded-full bg-indigo-900/10 blur-3xl" />
 
       <div className="z-10 mx-auto w-full max-w-6xl">
-        <div className="mb-6 flex justify-center" ref={badgeRef}>
+        <motion.div
+          className="mb-6 flex justify-center"
+          initial={reduceMotion ? false : { y: -40, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.1, ease: EASE }}
+        >
           <span className="flex items-center gap-3 rounded-full border border-gray-800 bg-[#111115] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-blue-400 shadow-sm sm:text-sm">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-blue-500"></span>
             MY PROJECTS
           </span>
-        </div>
+        </motion.div>
 
-        <h2
-          className="mb-6 text-center text-[45px] md:text-6xl lg:text-[70px] font-black tracking-tight"
-          ref={titleRef}
+        <motion.h2
+          className="mb-6 text-center text-5xl font-black tracking-tight text-white md:text-6xl lg:text-[70px]"
+          initial={reduceMotion ? false : { y: -40, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.1, delay: 0.2, ease: EASE }}
         >
           My{' '}
           <span className="bg-linear-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
             Projects
           </span>
-        </h2>
-        <p
+        </motion.h2>
+        <motion.p
           className="mx-auto mb-20 max-w-2xl text-center text-lg font-light leading-relaxed text-gray-400 md:text-xl"
-          ref={subtitleRef}
+          initial={reduceMotion ? false : { y: -40, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 1.1, delay: 0.4, ease: EASE }}
         >
           A selection of projects that showcase my experience in building modern, responsive, and
           user-focused web applications.
-        </p>
+        </motion.p>
 
         <div className="space-y-24 md:space-y-32">
           {projects.map((project: Project, index: number) => (

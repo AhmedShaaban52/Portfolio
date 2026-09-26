@@ -1,16 +1,14 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import type { CSSProperties, ElementType, MouseEvent, Ref, SyntheticEvent } from 'react'
-import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion, useReducedMotion, type Variants } from 'framer-motion'
 import { Mail, User, FileText, PenLine, Send, ArrowUp } from 'lucide-react'
 import { FaGithub, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa'
 import sendEmail from './SendEmail'
 
-gsap.registerPlugin(ScrollTrigger)
-
 const AVAILABLE_FOR_WORK = true
+const EASE = [0.22, 1, 0.36, 1] as const
 
 interface ContactItem {
   label: string
@@ -58,8 +56,19 @@ const CONTACTS: ContactItem[] = [
   },
 ]
 
+const tileVariants: Variants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.6, ease: EASE } },
+}
+
+const tilesContainerVariants: Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+}
+
 const ContactTile = ({ label, value, href, Icon, color, wide, external }: ContactItem) => (
-  <a
+  <motion.a
+    variants={tileVariants}
     href={href}
     {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
     style={{ '--c': color } as CSSProperties}
@@ -76,7 +85,7 @@ const ContactTile = ({ label, value, href, Icon, color, wide, external }: Contac
         {value}
       </span>
     </span>
-  </a>
+  </motion.a>
 )
 
 const FIELD_BASE =
@@ -173,67 +182,12 @@ const Field = ({
 const stopBubbling = (e: SyntheticEvent) => e.stopPropagation()
 
 const Contact = () => {
-  const sectionRef = useRef<HTMLElement>(null)
-  const badgeRef = useRef<HTMLDivElement>(null)
-  const titleRef = useRef<HTMLDivElement>(null)
-  const subtitleRef = useRef<HTMLParagraphElement>(null)
-  const tilesRef = useRef<HTMLDivElement>(null)
-  const formRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-
-    const ctx = gsap.context(() => {
-      gsap.from([badgeRef.current, titleRef.current, subtitleRef.current].filter(Boolean), {
-        y: 30,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      })
-
-      if (tilesRef.current) {
-        gsap.from(tilesRef.current.children, {
-          y: 30,
-          opacity: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'power3.out',
-          clearProps: 'transform,opacity',
-          scrollTrigger: {
-            trigger: tilesRef.current,
-            start: 'top 90%',
-            toggleActions: 'play none none none',
-          },
-        })
-      }
-
-      gsap.from(formRef.current, {
-        x: 60,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: formRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
-        },
-      })
-    }, sectionRef)
-
-    return () => ctx.revert()
-  }, [])
+  const reduceMotion = useReducedMotion()
 
   return (
     <section
       id="contact"
       className="relative overflow-hidden bg-[#07070a] px-4 py-24 md:px-8"
-      ref={sectionRef}
     >
       <div
         className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
@@ -250,8 +204,11 @@ const Contact = () => {
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col items-start gap-16 lg:flex-row lg:items-center lg:gap-20">
         <div className="flex w-full flex-col lg:w-1/2">
           {AVAILABLE_FOR_WORK && (
-            <div
-              ref={badgeRef}
+            <motion.div
+              initial={reduceMotion ? false : { y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, ease: EASE }}
               className="mb-6 inline-flex items-center gap-2.5 self-start rounded-full border border-gray-800 bg-[#111115] px-4 py-1.5 text-xs font-medium text-gray-300"
             >
               <span className="relative flex h-2 w-2">
@@ -259,35 +216,56 @@ const Contact = () => {
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
               Available for work
-            </div>
+            </motion.div>
           )}
 
-          <div ref={titleRef}>
-            <h2 className="mb-2 text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
+          <div>
+            <motion.h2
+              initial={reduceMotion ? false : { y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.8, delay: 0.12, ease: EASE }}
+              className="mb-2 text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]"
+            >
               Let&apos;s connect and <br className="hidden sm:block" />
               <span className="bg-linear-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
                 build something <br className="hidden sm:block" /> great together
               </span>
-            </h2>
+            </motion.h2>
             <div className="mb-8 mt-6 h-1.5 w-12 rounded-full bg-blue-600" />
           </div>
 
-          <p
+          <motion.p
+            initial={reduceMotion ? false : { y: 30, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{ duration: 0.8, delay: 0.24, ease: EASE }}
             className="mb-10 max-w-md text-lg font-light leading-relaxed text-gray-400"
-            ref={subtitleRef}
           >
             Whether you have a question, a project idea, or just want to say hi, feel free to drop a
             message!
-          </p>
+          </motion.p>
 
-          <div ref={tilesRef} className="grid gap-4 sm:grid-cols-2">
+          <motion.div
+            variants={tilesContainerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            className="grid gap-4 sm:grid-cols-2"
+          >
             {CONTACTS.map((contact) => (
               <ContactTile key={contact.label} {...contact} />
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        <div className="relative w-full lg:w-1/2" ref={formRef}>
+        <motion.div
+          className="relative w-full lg:w-1/2"
+          initial={reduceMotion ? false : { opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.9, ease: EASE }}
+        >
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-6 rounded-4xl bg-blue-600 opacity-20 blur-3xl"
@@ -361,7 +339,7 @@ const Contact = () => {
               </button>
             </form>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       <div className="relative z-10 mx-auto mt-24 flex max-w-7xl items-center justify-between border-t border-white/6 pt-8 text-sm text-gray-500">
