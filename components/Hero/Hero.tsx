@@ -66,7 +66,7 @@ const Hero = () => {
                     <ArrowDown size={14} className="group-hover:translate-y-1 transition-transform" />
                 </div>
             </div>
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 md:bottom-10 z-30 flex flex-col items-center gap-2 text-[10px] tracking-[0.25em] font-semibold text-gray-500">
+            <div className="absolute hidden md:flex flex-col items-center gap-2 bottom-6 left-1/2 -translate-x-1/2 md:bottom-10 z-30  text-[10px] tracking-[0.25em] font-semibold text-gray-500">
                 <span>BASED IN EGYPT</span>
                 <span className="text-gray-600">WORKING EVERYWHERE</span>
             </div>
