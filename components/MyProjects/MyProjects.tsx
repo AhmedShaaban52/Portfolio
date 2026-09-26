@@ -1,12 +1,15 @@
 "use client"
 
-import  { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { CSSProperties, MouseEvent } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { FaGithub } from 'react-icons/fa'
+import type { IconType } from 'react-icons'
 import { FiExternalLink } from 'react-icons/fi'
 import { projects } from './projectsObject'
 import Image from 'next/image'
+import type { StaticImageData } from 'next/image'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -14,9 +17,28 @@ const GITHUB_PROFILE = ''
 
 const ACCENTS = ['#3b82f6', '#f97316', '#06b6d4', "#0E56A2", "#EAB308"]
 
-const isVideo = (src) => typeof src === 'string' && /\.(mp4|webm)$/i.test(src)
+interface ProjectSkill {
+  name: string
+  Icon?: IconType
+  color?: string
+}
 
-const getHost = (url) => {
+type ProjectImage = string | StaticImageData
+
+interface Project {
+  name: string
+  description: string
+  img: ProjectImage
+  live?: string
+  github?: string
+  color?: string
+  skills?: (string | ProjectSkill)[]
+}
+
+const isVideo = (src: ProjectImage): src is string =>
+  typeof src === 'string' && /\.(mp4|webm)$/i.test(src)
+
+const getHost = (url?: string) => {
   if (!url) return 'localhost:3000'
   try {
     return new URL(url).host
@@ -25,16 +47,21 @@ const getHost = (url) => {
   }
 }
 
-const normalizeSkill = (s) => (typeof s === 'string' ? { name: s } : s)
+const normalizeSkill = (s: string | ProjectSkill): ProjectSkill => (typeof s === 'string' ? { name: s } : s)
 
-const ProjectShowcase = ({ project, index }) => {
-  const tiltRef = useRef(null)
+interface ProjectShowcaseProps {
+  project: Project
+  index: number
+}
+
+const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
+  const tiltRef = useRef<HTMLDivElement>(null)
   const [tipOpen, setTipOpen] = useState(false)
   const accent = project.color || ACCENTS[index % ACCENTS.length]
   const reversed = index % 2 === 1
   const { name, description, img, live, github, skills = [] } = project
 
-  const handleMove = (e) => {
+  const handleMove = (e: MouseEvent<HTMLDivElement>) => {
     const el = tiltRef.current
     if (!el) return
     if (!window.matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches) return
@@ -68,7 +95,7 @@ const ProjectShowcase = ({ project, index }) => {
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       className="group relative will-change-transform"
-      style={{ '--c': accent, '--mx': '50%', '--my': '50%' }}
+      style={{ '--c': accent, '--mx': '50%', '--my': '50%' } as CSSProperties}
     >
       <div
         aria-hidden="true"
@@ -80,7 +107,7 @@ const ProjectShowcase = ({ project, index }) => {
         className="relative overflow-hidden rounded-xl border border-white/10 bg-[#0c0c0f] transition-shadow duration-500 group-hover:border-(--c)"
         style={{ boxShadow: '0 30px 60px -20px rgba(0,0,0,0.8), 0 0 40px -18px var(--c)' }}
       >
-        
+
         <div className="flex items-center gap-2 border-b border-white/6 bg-[#111115] px-4 py-2.5">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
@@ -91,7 +118,7 @@ const ProjectShowcase = ({ project, index }) => {
           <span className="w-10.5 shrink-0" aria-hidden="true" />
         </div>
 
-        
+
         <div className="relative aspect-16/10 overflow-hidden bg-[#08080b]">
           {isVideo(img) ? (
             <video
@@ -107,11 +134,12 @@ const ProjectShowcase = ({ project, index }) => {
               src={img}
               alt={`${name} screenshot`}
               loading="lazy"
+              fill
               className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
             />
           )}
 
-          
+
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -131,7 +159,7 @@ const ProjectShowcase = ({ project, index }) => {
         reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
       }`}
     >
-      
+
       <div className="project-frame w-full lg:w-[58%]">
         {live ? (
           <a
@@ -148,8 +176,8 @@ const ProjectShowcase = ({ project, index }) => {
         )}
       </div>
 
-      
-      <div className="project-info w-full lg:w-[42%]" style={{ '--c': accent }}>
+
+      <div className="project-info w-full lg:w-[42%]" style={{ '--c': accent } as CSSProperties}>
         <div className="mb-5 h-1 w-12 rounded-full" style={{ background: 'var(--c)' }} />
 
         <h3 className="text-3xl font-bold tracking-tight text-white md:text-4xl">{name}</h3>
@@ -198,7 +226,7 @@ const ProjectShowcase = ({ project, index }) => {
                 aria-describedby={`live-tip-${index}`}
                 onFocus={() => setTipOpen(true)}
                 onBlur={() => setTipOpen(false)}
-                
+
                 onClick={() => {
                   setTipOpen(true)
                   setTimeout(() => setTipOpen(false), 2000)
@@ -258,17 +286,17 @@ const ProjectShowcase = ({ project, index }) => {
 }
 
 const MyProjects = () => {
-  const sectionRef = useRef(null)
-  const badgeRef = useRef(null)
-  const titleRef = useRef(null)
-  const subtitleRef = useRef(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const badgeRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLHeadingElement>(null)
+  const subtitleRef = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
-    
+
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const ctx = gsap.context(() => {
-      
+
       gsap.from([badgeRef.current, titleRef.current, subtitleRef.current], {
         y: -40,
         opacity: 0,
@@ -282,8 +310,8 @@ const MyProjects = () => {
         },
       })
 
-      
-      gsap.utils.toArray('.project-row').forEach((row, i) => {
+
+      gsap.utils.toArray<HTMLElement>('.project-row').forEach((row, i) => {
         const dir = i % 2 === 0 ? -1 : 1
         const scrollTrigger = {
           trigger: row,
@@ -291,14 +319,17 @@ const MyProjects = () => {
           toggleActions: 'play none none none',
         }
 
-        gsap.from(row.querySelector('.project-frame'), {
+        const frameEl = row.querySelector<HTMLElement>('.project-frame')
+        const infoEl = row.querySelector<HTMLElement>('.project-info')
+
+        gsap.from(frameEl, {
           x: 70 * dir,
           opacity: 0,
           duration: 0.9,
           ease: 'power3.out',
           scrollTrigger,
         })
-        gsap.from(row.querySelector('.project-info'), {
+        gsap.from(infoEl, {
           x: -70 * dir,
           opacity: 0,
           duration: 0.9,
@@ -356,7 +387,7 @@ const MyProjects = () => {
         </p>
 
         <div className="space-y-24 md:space-y-32">
-          {projects.map((project, index) => (
+          {projects.map((project: Project, index: number) => (
             <ProjectShowcase key={project.name ?? index} project={project} index={index} />
           ))}
         </div>

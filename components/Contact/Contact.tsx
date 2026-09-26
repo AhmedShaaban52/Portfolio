@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from 'react'
+import type { CSSProperties, ElementType, MouseEvent, Ref, SyntheticEvent } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Mail, User, FileText, PenLine, Send, ArrowUp } from 'lucide-react'
@@ -11,7 +12,17 @@ gsap.registerPlugin(ScrollTrigger)
 
 const AVAILABLE_FOR_WORK = true
 
-const CONTACTS = [
+interface ContactItem {
+  label: string
+  value: string
+  href: string
+  Icon: ElementType
+  color: string
+  wide?: boolean
+  external?: boolean
+}
+
+const CONTACTS: ContactItem[] = [
   {
     label: 'Email',
     value: 'ahmedshababn91@gmail.com',
@@ -23,7 +34,7 @@ const CONTACTS = [
   {
     label: 'WhatsApp',
     value: '+201024400646',
-    href: 'https://wa.me/201024400646',  
+    href: 'https://wa.me/201024400646',
     Icon: FaWhatsapp,
     color: '#25d366',
     wide: true,
@@ -47,11 +58,11 @@ const CONTACTS = [
   },
 ]
 
-const ContactTile = ({ label, value, href, Icon, color, wide, external }) => (
+const ContactTile = ({ label, value, href, Icon, color, wide, external }: ContactItem) => (
   <a
     href={href}
     {...(external && { target: '_blank', rel: 'noopener noreferrer' })}
-    style={{ '--c': color }}
+    style={{ '--c': color } as CSSProperties}
     className={`group flex items-center gap-4 rounded-2xl border border-white/6 bg-[#0c0c0f] p-4 transition-all duration-300 hover:border-(--c) hover:shadow-[0_0_28px_-8px_var(--c)]  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/70 ${
       wide ? 'sm:col-span-2' : ''
     }`}
@@ -71,27 +82,43 @@ const ContactTile = ({ label, value, href, Icon, color, wide, external }) => (
 const FIELD_BASE =
   'w-full rounded-xl border py-3.5 pl-11 pr-4 text-white caret-blue-400 placeholder-gray-600 transition-colors duration-200 focus:outline-none [&:-webkit-autofill]:[-webkit-text-fill-color:#fff] [&:-webkit-autofill]:shadow-[inset_0_0_0_1000px_#0a0a0f]'
 
-const Field = ({ id, name, label, type = 'text', placeholder, Icon, autoComplete, textarea = false }) => {
-  
+interface FieldProps {
+  id: string
+  name: string
+  label: string
+  type?: string
+  placeholder: string
+  Icon: ElementType
+  autoComplete?: string
+  textarea?: boolean
+}
+
+const Field = ({
+  id,
+  name,
+  label,
+  type = 'text',
+  placeholder,
+  Icon,
+  autoComplete,
+  textarea = false,
+}: FieldProps) => {
   const inputId = `contact-${id}`
-  const controlRef = useRef(null)
+  const controlRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
   const [focused, setFocused] = useState(false)
 
-  
-  const focusControl = (e) => {
+  const focusControl = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target !== controlRef.current) {
       e.preventDefault()
       controlRef.current?.focus()
     }
   }
 
-  
   const controlProps = {
     id: inputId,
     name,
     placeholder,
     required: true,
-    ref: controlRef,
     onFocus: () => setFocused(true),
     onBlur: () => setFocused(false),
     className: `${FIELD_BASE} ${
@@ -124,33 +151,39 @@ const Field = ({ id, name, label, type = 'text', placeholder, Icon, autoComplete
         </span>
 
         {textarea ? (
-          <textarea {...controlProps} rows={4} className={`${controlProps.className} resize-none`} />
+          <textarea
+            {...controlProps}
+            ref={controlRef as Ref<HTMLTextAreaElement>}
+            rows={4}
+            className={`${controlProps.className} resize-none`}
+          />
         ) : (
-          <input {...controlProps} type={type} autoComplete={autoComplete} />
+          <input
+            {...controlProps}
+            ref={controlRef as Ref<HTMLInputElement>}
+            type={type}
+            autoComplete={autoComplete}
+          />
         )}
       </div>
     </div>
   )
 }
 
-
-
-const stopBubbling = (e) => e.stopPropagation()
+const stopBubbling = (e: SyntheticEvent) => e.stopPropagation()
 
 const Contact = () => {
-  const sectionRef = useRef(null)
-  const badgeRef = useRef(null)
-  const titleRef = useRef(null)
-  const subtitleRef = useRef(null)
-  const tilesRef = useRef(null)
-  const formRef = useRef(null)
+  const sectionRef = useRef<HTMLElement>(null)
+  const badgeRef = useRef<HTMLDivElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
+  const subtitleRef = useRef<HTMLParagraphElement>(null)
+  const tilesRef = useRef<HTMLDivElement>(null)
+  const formRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const ctx = gsap.context(() => {
-      
       gsap.from([badgeRef.current, titleRef.current, subtitleRef.current].filter(Boolean), {
         y: 30,
         opacity: 0,
@@ -164,22 +197,22 @@ const Contact = () => {
         },
       })
 
-      
-      gsap.from(tilesRef.current.children, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: 'power3.out',
-        clearProps: 'transform,opacity',
-        scrollTrigger: {
-          trigger: tilesRef.current,
-          start: 'top 90%',
-          toggleActions: 'play none none none',
-        },
-      })
+      if (tilesRef.current) {
+        gsap.from(tilesRef.current.children, {
+          y: 30,
+          opacity: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power3.out',
+          clearProps: 'transform,opacity',
+          scrollTrigger: {
+            trigger: tilesRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+          },
+        })
+      }
 
-      
       gsap.from(formRef.current, {
         x: 60,
         opacity: 0,
@@ -231,7 +264,7 @@ const Contact = () => {
 
           <div ref={titleRef}>
             <h1 className="mb-2 text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
-              Let's connect and <br className="hidden sm:block" />
+              Let&apos;s connect and <br className="hidden sm:block" />
               <span className="bg-linear-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
                 build something <br className="hidden sm:block" /> great together
               </span>

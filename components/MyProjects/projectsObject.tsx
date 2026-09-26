@@ -5,7 +5,6 @@ import istikbal from "@/public/istikbal.png";
 import sarar from "@/public/sarar.png";
 
 
-
 export const projects = [
     {
         img: temry,

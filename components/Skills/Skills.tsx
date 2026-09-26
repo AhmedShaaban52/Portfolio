@@ -1,14 +1,16 @@
 "use client"
 
 import { motion, useReducedMotion } from 'framer-motion';
+import type { CSSProperties } from 'react';
+import type { IconType } from 'react-icons';
 import {
     SiHtml5,
     SiTailwindcss,
     SiJavascript,
-    SiTypescript, 
+    SiTypescript,
     SiReact,
     SiNextdotjs,
-    SiRedux, 
+    SiRedux,
     SiGreensock,
     SiFigma,
     SiNodedotjs,
@@ -18,7 +20,7 @@ import {
     SiPostgresql,
     SiMysql,
     SiMongodb,
-    SiDrizzle, 
+    SiDrizzle,
     SiGithub,
     SiGit,
     SiPostman,
@@ -26,21 +28,26 @@ import {
 } from 'react-icons/si';
 import { FaCss3Alt } from 'react-icons/fa';
 
+interface SkillItem {
+    name: string;
+    Icon: IconType;
+    color: string;
+}
 
-const FRONTEND = [
+const FRONTEND: SkillItem[] = [
     { name: 'HTML5', Icon: SiHtml5, color: '#e34f26' },
     { name: 'CSS3', Icon: FaCss3Alt, color: '#1572b6' },
     { name: 'Tailwind CSS', Icon: SiTailwindcss, color: '#06b6d4' },
     { name: 'JavaScript', Icon: SiJavascript, color: '#f7df1e' },
-    { name: 'TypeScript', Icon: SiTypescript, color: '#3178c6' }, 
+    { name: 'TypeScript', Icon: SiTypescript, color: '#3178c6' },
     { name: 'React.js', Icon: SiReact, color: '#61dafb' },
     { name: 'Next.js', Icon: SiNextdotjs, color: '#ffffff' },
-    { name: 'Redux Toolkit', Icon: SiRedux, color: '#764abc' }, 
+    { name: 'Redux Toolkit', Icon: SiRedux, color: '#764abc' },
     { name: 'GSAP', Icon: SiGreensock, color: '#88ce02' },
     { name: 'Figma', Icon: SiFigma, color: '#f24e1e' },
 ];
 
-const BACKEND_AND_TOOLS = [
+const BACKEND_AND_TOOLS: SkillItem[] = [
     { name: 'Node.js', Icon: SiNodedotjs, color: '#5fa04e' },
     { name: 'Express.js', Icon: SiExpress, color: '#fb923c' },
     { name: 'NestJS', Icon: SiNestjs, color: '#e0234e' },
@@ -57,7 +64,17 @@ const BACKEND_AND_TOOLS = [
 
 const COPIES = 6;
 
-const CUBES = [
+interface CubeConfig {
+    size: number;
+    top: string;
+    left: string;
+    dur: number;
+    delay: number;
+    color: string;
+    mobile: boolean;
+}
+
+const CUBES: CubeConfig[] = [
     { size: 70, top: '12%', left: '8%',  dur: 26, delay: 0,   color: '#61dafb', mobile: true },
     { size: 46, top: '18%', left: '82%', dur: 22, delay: -6,  color: '#a259ff', mobile: true },
     { size: 90, top: '60%', left: '88%', dur: 32, delay: -12, color: '#06b6d4', mobile: false },
@@ -67,7 +84,7 @@ const CUBES = [
 
 const FACES = ['front', 'back', 'right', 'left', 'top', 'bottom'];
 
-const Cube = ({ size, top, left, dur, delay, color, mobile }) => (
+const Cube = ({ size, top, left, dur, delay, color, mobile }: CubeConfig) => (
     <div
         className={`cube-wrap ${mobile ? '' : 'hidden md:block'}`}
         style={{
@@ -77,7 +94,7 @@ const Cube = ({ size, top, left, dur, delay, color, mobile }) => (
             '--c': color,
             '--dur': `${dur}s`,
             '--delay': `${delay}s`,
-        }}
+        } as CSSProperties}
     >
         <div className="cube">
             {FACES.map((f) => (
@@ -107,9 +124,9 @@ const Background3D = () => (
 );
 
 
-const Tile = ({ name, Icon, color }) => (
+const Tile = ({ name, Icon, color }: SkillItem) => (
     <li
-        style={{ '--c': color }}
+        style={{ '--c': color } as CSSProperties}
         className="group flex w-33 shrink-0 flex-col items-center justify-center gap-3 rounded-2xl border border-white/6 bg-[#0c0c0f] py-6 transition-all duration-300 hover:border-(--c) hover:shadow-[0_0_28px_-8px_var(--c)]"
     >
         <Icon
@@ -123,7 +140,14 @@ const Tile = ({ name, Icon, color }) => (
     </li>
 );
 
-const Marquee = ({ label, items, duration = 45, reverse = false }) => (
+interface MarqueeProps {
+    label: string;
+    items: SkillItem[];
+    duration?: number;
+    reverse?: boolean;
+}
+
+const Marquee = ({ label, items, duration = 45, reverse = false }: MarqueeProps) => (
     <div className="skills-marquee overflow-hidden py-2">
         <div
             className="skills-track"
@@ -131,7 +155,7 @@ const Marquee = ({ label, items, duration = 45, reverse = false }) => (
                 '--copies': COPIES,
                 '--duration': `${duration}s`,
                 animationDirection: reverse ? 'reverse' : 'normal',
-            }}
+            } as CSSProperties}
         >
             {Array.from({ length: COPIES }, (_, copy) => (
                 <ul
@@ -140,7 +164,7 @@ const Marquee = ({ label, items, duration = 45, reverse = false }) => (
                     aria-label={copy === 0 ? label : undefined}
                     aria-hidden={copy > 0 ? 'true' : undefined}
                 >
-                    {items.map((item) => (
+                    {items.map((item: SkillItem) => (
                         <Tile key={item.name} {...item} />
                     ))}
                 </ul>
