@@ -263,12 +263,12 @@ const Contact = () => {
           )}
 
           <div ref={titleRef}>
-            <h1 className="mb-2 text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
+            <h2 className="mb-2 text-4xl font-black leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.5rem]">
               Let&apos;s connect and <br className="hidden sm:block" />
               <span className="bg-linear-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
                 build something <br className="hidden sm:block" /> great together
               </span>
-            </h1>
+            </h2>
             <div className="mb-8 mt-6 h-1.5 w-12 rounded-full bg-blue-600" />
           </div>
 
@@ -367,7 +367,7 @@ const Contact = () => {
       <div className="relative z-10 mx-auto mt-24 flex max-w-7xl items-center justify-between border-t border-white/6 pt-8 text-sm text-gray-500">
         <p>© {new Date().getFullYear()} Ahmed Shaaban</p>
         <a
-          href="#home"
+          href="#hero"
           className="inline-flex items-center gap-2 transition-colors duration-300 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white/70"
         >
           <ArrowUp size={16} aria-hidden="true" />

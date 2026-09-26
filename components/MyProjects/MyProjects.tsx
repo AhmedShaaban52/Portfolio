@@ -127,6 +127,8 @@ const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
               loop
               muted
               playsInline
+              preload="none"
+              aria-label={`${name} demo preview`}
               className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
             />
           ) : (
@@ -135,6 +137,7 @@ const ProjectShowcase = ({ project, index }: ProjectShowcaseProps) => {
               alt={`${name} screenshot`}
               loading="lazy"
               fill
+              sizes="(min-width: 1024px) 58vw, 100vw"
               className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]"
             />
           )}
@@ -369,7 +372,7 @@ const MyProjects = () => {
           </span>
         </div>
 
-        <h1
+        <h2
           className="mb-6 text-center text-5xl font-black tracking-tight text-white md:text-6xl lg:text-[70px]"
           ref={titleRef}
         >
@@ -377,7 +380,7 @@ const MyProjects = () => {
           <span className="bg-linear-to-r from-blue-500 to-cyan-400 bg-clip-text text-transparent">
             Projects
           </span>
-        </h1>
+        </h2>
         <p
           className="mx-auto mb-20 max-w-2xl text-center text-lg font-light leading-relaxed text-gray-400 md:text-xl"
           ref={subtitleRef}
