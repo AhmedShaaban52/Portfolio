@@ -373,7 +373,7 @@ const MyProjects = () => {
         </div>
 
         <h2
-          className="mb-6 text-center text-5xl font-black tracking-tight text-white md:text-6xl lg:text-[70px]"
+          className="mb-6 text-center text-[45px] md:text-6xl lg:text-[70px] font-black tracking-tight"
           ref={titleRef}
         >
           My{' '}
